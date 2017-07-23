@@ -1,0 +1,42 @@
+version: "2"
+
+services:
+  frontend:
+    image: guitarhorse-frontend
+    build:
+      context: ./frontend/
+    volumes:
+      - ./frontend/app/:/usr/share/nginx/html
+    environment:
+      VIRTUAL_HOST: '*'
+      VIRTUAL_HOST_WEIGHT: 0
+  builder:
+    build:
+      context: ./frontend/builder
+    volumes:
+      - ./frontend/src:/build/src
+      - ./frontend/app:/build/app
+  backend:
+    image: guitarhorse-backend
+    build:
+      context: ./backend/
+    links:
+      - postgres
+    volumes:
+      - ./backend/:/backend/
+    environment:
+      VIRTUAL_HOST: '*/api/*'
+      VIRTUAL_HOST_WEIGHT: 1
+      EXTRA_SETTINGS: 'reqrep ^([^\ :]*)\ /api/(.*) \1\ /\2, reqadd X-Forwarded-Script-Name:\ /api'
+  proxy:
+    image: dockercloud/haproxy
+    links:
+      - frontend
+      - backend
+    ports:
+      - 5000:80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  postgres:
+    image: postgres:10-alpine
+

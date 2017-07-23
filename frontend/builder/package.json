@@ -1,0 +1,42 @@
+{
+  "name": "tmp",
+  "version": "1.0.0",
+  "description": "A Vue.js project",
+  "author": "Ashley Murphy",
+  "private": true,
+  "scripts": {
+    "dev": "node webpack/dev-server.js",
+    "start": "node webpack/dev-server.js",
+    "build": "node webpack/build.js",
+    "lint": "eslint --ext .js,.vue src"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "bootstrap-vue": "^0.18.0",
+    "vue": "^2.3.4",
+    "vue-router": "^2.7.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.0.0",
+    "babel-loader": "^6.0.0",
+    "babel-preset-env": "^1.5.1",
+    "cross-env": "^3.0.0",
+    "css-loader": "^0.25.0",
+    "node-sass": "^4.5.0",
+    "sass-loader": "^5.0.1",
+    "url-loader": "^0.5.9",
+    "vue-loader": "^12.1.0",
+    "vue-template-compiler": "^2.3.3",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
+  },
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
