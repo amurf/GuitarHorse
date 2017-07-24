@@ -59,7 +59,6 @@ module.exports = {
             },
           },
         ],
-        //loader: 'style!css!sass',
 				exclude: /(node_modules)/,
 			},
 			{
@@ -96,6 +95,9 @@ module.exports = {
 		historyApiFallback: true,
 		noInfo: true
 	},
+  performance: {
+    hints: false
+  },
 	devtool: 'source-map'
 }
 
