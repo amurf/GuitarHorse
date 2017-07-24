@@ -18,9 +18,12 @@ services:
       - ./frontend/app:/build/app
   backend:
     image: guitarhorse-backend
+    command: ./docker-compose-start.sh
     build:
       context: ./backend/
     links:
+      - postgres
+    depends_on:
       - postgres
     environment:
       VIRTUAL_HOST: '*/api/*'
@@ -37,4 +40,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
   postgres:
     image: postgres:10-alpine
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: guitarhorse
 
