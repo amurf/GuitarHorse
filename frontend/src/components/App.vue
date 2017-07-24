@@ -21,8 +21,6 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '~styles/overrides.scss';
-
 .container.content {
 	padding: 60px 15px 0;
 }

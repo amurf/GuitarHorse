@@ -1,8 +1,6 @@
 var path    = require('path')
 var webpack = require('webpack')
 
-
-
 module.exports = {
 	entry: {
 		app: '/build/src/app.js',
@@ -34,14 +32,34 @@ module.exports = {
 				loader: 'vue-loader',
 				options: {
 					loaders: {
-						'scss': 'vue-style-loader!css-loader!sass-loader',
-						'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
-					}
-				}
+						'scss': [
+              { loader: "vue-style-loader" },
+              { loader: "css-loader" },
+              { loader: "sass-loader" },
+              {
+                loader: 'sass-resources-loader',
+                options: {
+                  resources: '/build/src/scss/overrides.scss',
+                },
+              },
+            ],
+					},
+				},
 			},
 			{
 				test: /\.scss$/,
-        loader: 'style!css!sass',
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" },
+          { loader: "sass-loader" },
+          {
+            loader: 'sass-resources-loader',
+            options: {
+              resources: '/build/src/scss/overrides.scss',
+            },
+          },
+        ],
+        //loader: 'style!css!sass',
 				exclude: /(node_modules)/,
 			},
 			{
@@ -71,7 +89,7 @@ module.exports = {
 		extensions: ['.js', '.vue', '.json'],
 		alias: {
 			'vue$': 'vue/dist/vue.esm.js',
-      styles: '/build/src/scss',
+      src: '/build/src/',
 		}
 	},
 	devServer: {
