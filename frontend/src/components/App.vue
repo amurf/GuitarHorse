@@ -1,27 +1,55 @@
 <template>
-	<div>
-		<gh-navbar></gh-navbar>
-		<!-- Begin page content -->
-		<div class="container content">
-			<div class="mt-3">
-				<h1>Sticky footer with fixed navbar</h1>
-			</div>
-			<p class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt; .container</code>.</p>
-		</div>
-		<gh-footer></gh-footer>
-	</div>
+  <div>
+    <gh-navbar></gh-navbar>
+    <!-- Begin page content -->
+    <div class="container content">
+      <div class="mt-3"><h1>{{ form.config.name }}</h1></div>
+      <component :is="renderComponent" :form="form"></component>
+    </div>
+    <gh-footer></gh-footer>
+  </div>
 </template>
 <script>
 import ghNavbar from './Navbar';
 import ghFooter from './Footer';
 
+// Pull in all components from layouts here.
+import { ghForm, ghFormSections } from './layouts';
+
 export default {
-	name: 'app',
-	components: { ghNavbar, ghFooter },
+  name: 'app',
+  components: { ghNavbar, ghFooter, ghForm, ghFormSections },
+  computed: {
+    renderComponent: function() {
+      // Non-default rendering component configured.
+      if (this.form.config.renderComponent) {
+        return this.form.config.renderComponent;
+      }
+
+      let hasSections = this.form.hasOwnProperty('sections');
+      return hasSections ? 'ghFormSections' : 'ghForm';
+    },
+  },
+  data() {
+    return {
+      form: {
+        config: {
+          name: "The survey",
+          // renderComponent: 'somethingElse',
+        },
+        questions: {
+          abc: { type: 'text', label: "Something" }
+        },
+        sections: {
+          start: ['abc']
+        },
+      }
+    }
+  }
 }
 </script>
 <style lang="scss">
 .container.content {
-	padding: 60px 15px 0;
+  padding: 60px 15px 0;
 }
 </style>
