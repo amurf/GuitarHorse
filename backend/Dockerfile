@@ -13,8 +13,10 @@ RUN npm install -q
 COPY docker/docker-compose-start.sh /backend/
 COPY docker/start.sh /backend/
 
-COPY index.js /backend/
+COPY lib /backend/lib
+
+COPY server.js /backend/
 COPY schema.sql /backend/
 
 EXPOSE 80
-CMD node index.js
+CMD node server.js

@@ -26,6 +26,7 @@ services:
     depends_on:
       - postgres
     environment:
+      DB_URI: postgres://postgres:password@postgres:5432/guitarhorse
       VIRTUAL_HOST: '*/api/*'
       VIRTUAL_HOST_WEIGHT: 1
       EXTRA_SETTINGS: 'reqrep ^([^\ :]*)\ /api/(.*) \1\ /\2, reqadd X-Forwarded-Script-Name:\ /api'

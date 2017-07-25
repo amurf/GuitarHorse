@@ -5,14 +5,11 @@ const Hapi = require('hapi');
 const server = new Hapi.Server();
 server.connection({ port: 80 });
 
-server.route({
-    method: 'GET',
-    path: '/ping',
-    handler: function (request, reply) {
-      let obj = { response: "Hello!" };
-      reply(obj);
-    }
-});
+const routes = require('./lib/routes');
+routes.forEach(route => server.route(route));
+
+const db = require('./lib/db');
+db.getForms().then(console.log);
 
 server.start((err) => {
     if (err) {
