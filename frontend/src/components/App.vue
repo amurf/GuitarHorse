@@ -39,10 +39,10 @@ export default {
           name: "The survey",
           // renderComponent: 'somethingElse',
         },
-        questions: {
-          abc: { type: 'text', label: "Something", name: "abc", number: '1'},
-          def: { type: 'text', label: "Something else", name: "def", number: '2'},
-        },
+        questions: [
+          { type: 'text', label: "First Question", name: "qOne", number: '1'},
+          { type: 'text', label: "Second Question", name: "qTwo", number: '2'},
+        ],
         /*sections: {
           start: ['abc']
         },*/

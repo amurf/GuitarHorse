@@ -1,11 +1,12 @@
 <template>
   <div class='question'>
     <div class='question-label'>
-      <span class='number'>{{ question.number }}</span>
+      <span class='number'>{{ number }}</span>
       <label>{{ question.label }}</label>
       <span class='status'>status</span>
     </div>
     <div class='question-input'>
+      <input type="text" v-model="answers[question.name]" />
       <p>Field goes here</p>
       <p>question type: {{ question.type }}<br>name: {{ question.name }}</p>
     </div>
@@ -14,7 +15,7 @@
 <script>
 export default {
   name: 'question',
-  props: ['question'],
+  props: ['number', 'question', 'answers'],
 }
 </script>
 <style lang="scss">

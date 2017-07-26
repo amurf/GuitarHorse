@@ -1,7 +1,9 @@
 <template>
   <div>
-    <h1>No Sections</h1>
-    <gh-question v-for="question in form.questions" :key="question.name" :question="question"></gh-question>
+    <gh-question v-for="(question, index) in form.questions" :key="question.name"
+      :number="index + 1" :question="question" :answers="answers">
+    </gh-question>
+    <p>answers: <code>{{ answers }}</code></p>
   </div>
 </template>
 
@@ -13,6 +15,22 @@ export default {
   name: 'gh-form',
   props: ['form'],
   components: { ghQuestion },
+  computed: {
+    questionsByName: function() {
+      let questionsByName = {};
+      for (let question of this.form.questions) {
+        questionsByName[question.name] = question;
+      }
+      return questionsByName;
+    },
+  },
+  data() {
+    return {
+      answers: {
+        qTwo: "Default response",
+      },
+    };
+  },
 };
 
 </script>
