@@ -12,10 +12,11 @@
 <script>
 import ghNavbar from './Navbar';
 import ghFooter from './Footer';
-
-import axios from 'axios';
 // Pull in all components from layouts here.
 import { ghForm, ghFormSections } from './layouts';
+
+
+import axios from 'axios';
 
 export default {
   name: 'app',
@@ -39,11 +40,12 @@ export default {
           // renderComponent: 'somethingElse',
         },
         questions: {
-          abc: { type: 'text', label: "Something" }
+          abc: { type: 'text', label: "Something", name: "abc", number: '1'},
+          def: { type: 'text', label: "Something else", name: "def", number: '2'},
         },
-        sections: {
+        /*sections: {
           start: ['abc']
-        },
+        },*/
       }
     }
   },
