@@ -12,9 +12,9 @@ const db = require('./lib/db');
 db.getForms().then(forms => forms.forEach(x => console.log("Route:", x)));
 
 server.start((err) => {
-    if (err) {
-        throw err;
-    }
-    console.log(`Server running at: ${server.info.uri}`);
+  if (err) {
+    throw err;
+  }
+  console.log(`Server running at: ${server.info.uri}`);
 });
 

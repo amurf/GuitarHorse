@@ -1,19 +1,19 @@
 <template>
-	<footer class="footer">
-		<div class="container">
-			<span class="text-muted">Place sticky footer content here.</span>
-		</div>
-	</footer>
+  <footer class="footer">
+    <div class="container">
+      <span class="text-muted">Place sticky footer content here.</span>
+    </div>
+  </footer>
 </template>
 <script>
 export default {
-	name: 'gh-footer',
+  name: 'gh-footer',
 }
 </script>
 <style lang="scss" scoped>
 .container {
-    padding-right: 15px;
-    padding-left: 15px;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 .footer {
   position: absolute;
