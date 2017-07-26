@@ -13,6 +13,7 @@
 import ghNavbar from './Navbar';
 import ghFooter from './Footer';
 
+import axios from 'axios';
 // Pull in all components from layouts here.
 import { ghForm, ghFormSections } from './layouts';
 
@@ -45,7 +46,11 @@ export default {
         },
       }
     }
-  }
+  },
+  created() {
+    // axios.post('/api/form', {config: this.form }).then(console.log("Added"));
+    // Pull in the config here.
+  },
 }
 </script>
 <style lang="scss">
