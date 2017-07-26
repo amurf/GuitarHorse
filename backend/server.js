@@ -9,7 +9,7 @@ const routes = require('./lib/routes');
 routes.forEach(route => server.route(route));
 
 const db = require('./lib/db');
-db.getForms().then(console.log);
+db.getForms().then(forms => forms.forEach(x => console.log("Route:", x)));
 
 server.start((err) => {
     if (err) {
