@@ -6,6 +6,18 @@ module.exports = {
   addForm: addForm,
 };
 
+async function doQuery(queryPromise) {
+  let result;
+
+  try {
+    result = await queryPromise;
+  } catch(e) {
+    console.error(e);
+  }
+
+  return result;
+}
+
 async function getForms() {
   let forms;
 
@@ -20,6 +32,7 @@ async function getForms() {
 
 async function addForm(formObj) {
   let newForm;
+
   try {
     newForm = await db.none('INSERT INTO form(config) VALUES($1)', [formObj]);
   } catch (e) {
