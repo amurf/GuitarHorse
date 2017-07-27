@@ -25,7 +25,7 @@ export default {
     addQuestion: function() {
       let question = {
         name: 'example-' + this.questionsAdded,
-        type: 'text',
+        component: 'ghText',
         label: 'the example label'
       };
       this.$emit('question-added', question);

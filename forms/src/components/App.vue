@@ -12,10 +12,9 @@
 <script>
 import ghNavbar from './Navbar';
 import ghFooter from './Footer';
+
 // Pull in all components from layouts here.
 import { ghForm, ghFormSections } from './layouts';
-
-
 import axios from 'axios';
 
 export default {
@@ -39,8 +38,10 @@ export default {
           name: "The survey",
         },
         questions: [
-          { type: 'text', label: "First Question", name: "qOne", number: '1'},
-          { type: 'text', label: "Second Question", name: "qTwo", number: '2'},
+          { component: 'ghText', label: "First Question", name: "qOne"},
+          { component: 'ghText', label: "Second Question", name: "qTwo"},
+          { component: 'ghScale', label: "Third question", name: "qThree", options: ["one", "two", "three" ] },
+          { component: 'ghScale', label: "Fourth question", name: "qFour", options: 3 },
         ],
         /*sections: {
           start: ['abc']

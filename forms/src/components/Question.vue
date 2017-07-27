@@ -6,16 +6,20 @@
       <span class='status'>status</span>
     </div>
     <div class='question-input'>
-      <input type="text" v-model="answers[question.name]" />
-      <p>Field goes here</p>
-      <p>question type: {{ question.type }}<br>name: {{ question.name }}</p>
+      <component :is="question.component" :answers="answers" :question="question"></component>
     </div>
   </div>
 </template>
 <script>
+
+//Pull in slot types
+import ghText from './Text';
+import ghScale from './Scale';
+
 export default {
   name: 'question',
   props: ['number', 'question', 'answers'],
+  components: { ghText, ghScale },
 }
 </script>
 <style lang="scss">
