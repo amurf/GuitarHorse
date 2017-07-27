@@ -2,7 +2,7 @@
   <div class='container'>
     <div class='row'>
       <div class='col-9 content'>
-        <h1>{{ form.config.name }}</h1>
+        <h1>{{ form.name }}</h1>
         <draggable v-model="form.questions">
         <transition-group name="list-complete">
           <gh-question v-for="(question, index) in form.questions" :key="question.name"
@@ -13,7 +13,8 @@
         <p>output: <code>{{ form }}</code></p>
       </div>
       <div class='col sidebar'>
-        <input type="text" placeholder="Survey title" v-model="form.config.name" />
+        <input type="text" placeholder="Survey title" v-model="form.name" />
+        <b-btn variant="success" size="small" @click="saveForm">Save</b-btn>
         <gh-component-list @question-added="addQuestion"></gh-component-list>
       </div>
     </div>
@@ -30,28 +31,40 @@ import draggable from 'vuedraggable'
 
 export default {
   name: 'form-builder',
+  props: ['surveyId'],
   components: { ghComponentList, ghQuestion, draggable },
   data() {
     return {
       answers: {},
       form: {
-        config: {
-          name: undefined,
-        },
+        name: undefined,
         questions: [],
         sections: undefined,
       },
     };
   },
+  created() {
+    console.log(this);
+    if (this.surveyId) {
+      axios.get('http://localhost:5555/api/form/' + this.surveyId).then(
+        response => this.form = response.data.config
+      );
+    }
+  },
   methods: {
     addQuestion: function(question) {
       this.form.questions.push(question);
+    },
+    saveForm: function() {
+      axios.post('http://localhost:5555/api/form', {config: this.form}).then(
+        response => console.log("Form saved", response)
+      );
     },
   },
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .content {
   padding: 10px;
 }

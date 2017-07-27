@@ -3,6 +3,7 @@ const db  = pgp(process.env.DB_URI);
 
 module.exports = {
   getForms: getForms,
+  getForm: getForm,
   addForm: addForm,
 };
 
@@ -23,6 +24,18 @@ async function getForms() {
 
   try {
     forms = await db.any('SELECT * FROM form');
+  } catch(e) {
+    console.error("Error: ", e);
+  }
+
+  return forms;
+}
+
+async function getForm(id) {
+  let forms;
+
+  try {
+    forms = await db.one('SELECT * FROM form WHERE id = ${id}', {id: id});
   } catch(e) {
     console.error("Error: ", e);
   }

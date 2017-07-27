@@ -1,7 +1,7 @@
 <template>
   <b-navbar toggleable type="inverse" variant="inverse">
     <b-nav-toggle target="nav_collapse"></b-nav-toggle>
-    <b-link class="navbar-brand" to="#">
+    <b-link class="navbar-brand" to="/">
       <span>Creator</span>
     </b-link>
     <b-collapse is-nav id="nav_collapse">

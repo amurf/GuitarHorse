@@ -2,7 +2,7 @@
   <div>
     <gh-navbar></gh-navbar>
     <div class="container content">
-      <gh-form-builder></gh-form-builder>
+      <router-view></router-view>
     </div>
     <gh-footer></gh-footer>
   </div>
@@ -10,14 +10,10 @@
 <script>
 import ghNavbar from './Navbar';
 import ghFooter from './Footer';
-import ghFormBuilder from './FormBuilder';
-
-
-import axios from 'axios';
 
 export default {
   name: 'app',
-  components: { ghNavbar, ghFooter, ghFormBuilder },
+  components: { ghNavbar, ghFooter },
 }
 </script>
 <style lang="scss">
