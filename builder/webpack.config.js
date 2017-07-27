@@ -89,6 +89,7 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       src: '/build/src/',
+      shared: '/build/shared/',
     }
   },
   devtool: '#cheap-module-eval-source-map',

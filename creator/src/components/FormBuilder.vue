@@ -5,7 +5,7 @@
         <h1>{{ form.config.name }}</h1>
         <draggable v-model="form.questions">
         <transition-group name="list-complete">
-          <gh-question v-for="(question, index) in form.questions" :key="question"
+          <gh-question v-for="(question, index) in form.questions" :key="question.name"
                        :question="question" :number="index + 1" :answers="answers" class="list-complete-item">
           </gh-question>
         </transition-group>
@@ -22,7 +22,8 @@
 
 <script>
 import ghComponentList from './ComponentList';
-import ghQuestion from './Question';
+
+import ghQuestion from 'shared/Question';
 
 import axios from 'axios';
 import draggable from 'vuedraggable'
