@@ -47,14 +47,14 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: guitarhorse
   frontend-builder:
-    build:
-      context: ./builder
+    image: guitarhorse-builder
     volumes:
       - ./frontend/src:/build/src
       - ./frontend/app:/build/app
   creator-builder:
-    build:
-      context: ./builder
+    image: guitarhorse-builder
     volumes:
       - ./creator/src:/build/src
       - ./creator/app:/build/app
+
+
