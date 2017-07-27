@@ -10,12 +10,14 @@ services:
     environment:
       VIRTUAL_HOST: '*'
       VIRTUAL_HOST_WEIGHT: 0
-  builder:
+  creator:
+    image: guitarhorse-creator
     build:
-      context: ./frontend/builder
+      context: ./creator/
     volumes:
-      - ./frontend/src:/build/src
-      - ./frontend/app:/build/app
+      - ./creator/app/:/usr/share/nginx/html
+    ports:
+      - 5556:80
   backend:
     image: guitarhorse-backend
     command: ./docker-compose-start.sh
@@ -44,4 +46,15 @@ services:
     environment:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: guitarhorse
-
+  frontend-builder:
+    build:
+      context: ./builder
+    volumes:
+      - ./frontend/src:/build/src
+      - ./frontend/app:/build/app
+  creator-builder:
+    build:
+      context: ./builder
+    volumes:
+      - ./creator/src:/build/src
+      - ./creator/app:/build/app

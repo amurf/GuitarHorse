@@ -37,7 +37,6 @@ export default {
       form: {
         config: {
           name: "The survey",
-          // renderComponent: 'somethingElse',
         },
         questions: [
           { type: 'text', label: "First Question", name: "qOne", number: '1'},
