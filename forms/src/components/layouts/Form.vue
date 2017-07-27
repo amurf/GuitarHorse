@@ -1,9 +1,9 @@
 <template>
   <div>
+    <p>answers: <code>{{ answers }}</code></p>
     <gh-question v-for="(question, index) in form.questions" :key="question.name"
       :number="index + 1" :question="question" :answers="answers">
     </gh-question>
-    <p>answers: <code>{{ answers }}</code></p>
   </div>
 </template>
 
