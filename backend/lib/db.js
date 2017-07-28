@@ -26,6 +26,6 @@ function getForm(id) {
 }
 
 function addForm(form) {
-  let query = db.none('INSERT INTO form(config) VALUES($1)', [form]);
+  let query = db.one('INSERT INTO form(config) VALUES($1) RETURNING id', [form]);
   return doQuery(query);
 }

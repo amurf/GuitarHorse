@@ -13,7 +13,7 @@ function ping(request, reply) {
 
 function addForm(request, reply) {
   db.addForm(request.payload.config).then(
-    reply({response: 'ok'})
+    form => reply({id: form.id})
   );
 }
 
