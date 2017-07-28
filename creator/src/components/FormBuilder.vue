@@ -44,7 +44,6 @@ export default {
     };
   },
   created() {
-    console.log(this);
     if (this.surveyId) {
       axios.get('http://localhost:5555/api/form/' + this.surveyId).then(
         response => this.form = response.data.config
@@ -57,7 +56,11 @@ export default {
     },
     saveForm: function() {
       axios.post('http://localhost:5555/api/form', {config: this.form}).then(
-        response => console.log("Form saved", response)
+        response => {
+          if (!this.surveyId) { // update url if first save.
+            this.$router.push({ name: 'Form', params: { surveyId: response.data.id }});
+          }
+        }
       );
     },
   },
