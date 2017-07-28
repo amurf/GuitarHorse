@@ -33,25 +33,13 @@ export default {
   },
   data() {
     return {
-      form: {
-        config: {
-          name: "The survey",
-        },
-        questions: [
-          { component: 'ghText', label: "First Question", name: "qOne"},
-          { component: 'ghText', label: "Second Question", name: "qTwo"},
-          { component: 'ghScale', label: "Third question", name: "qThree", options: ["one", "two", "three" ] },
-          { component: 'ghScale', label: "Fourth question", name: "qFour", options: 3 },
-        ],
-        /*sections: {
-          start: ['abc']
-        },*/
-      }
+      form: undefined,
     }
   },
   created() {
-    // axios.post('/api/form', {config: this.form }).then(console.log("Added"));
-    // Pull in the config here.
+    axios.get('/api/config').then(
+      response => this.form = response.data.config
+    );
   },
 }
 </script>

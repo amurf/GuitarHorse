@@ -2,6 +2,7 @@ const db = require('./db');
 
 let routes = [
   route('GET', '/ping', ping),
+  route('GET', '/config', config),
   route('GET', '/form', getForms),
   route('GET', '/form/{id}', getForm),
   route('POST', '/form', addForm),
@@ -9,6 +10,11 @@ let routes = [
 
 function ping(request, reply) {
   reply({response: 'ok'});
+}
+
+function config(request, reply) {
+  let surveyId = process.env.SURVEY_ID;
+  db.getForm(surveyId).then(form => reply(form));
 }
 
 function addForm(request, reply) {
