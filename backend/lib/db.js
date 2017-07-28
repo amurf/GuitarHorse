@@ -7,50 +7,25 @@ module.exports = {
   addForm: addForm,
 };
 
-async function doQuery(queryPromise) {
-  let result;
-
-  try {
-    result = await queryPromise;
-  } catch(e) {
-    console.error(e);
-  }
-
-  return result;
+function errorHandler(e) {
+  console.error(e)
 }
 
-async function getForms() {
-  let forms;
-
-  try {
-    forms = await db.any('SELECT * FROM form');
-  } catch(e) {
-    console.error("Error: ", e);
-  }
-
-  return forms;
+function doQuery(queryPromise) {
+  return queryPromise.catch(errorHandler);
 }
 
-async function getForm(id) {
-  let forms;
-
-  try {
-    forms = await db.one('SELECT * FROM form WHERE id = ${id}', {id: id});
-  } catch(e) {
-    console.error("Error: ", e);
-  }
-
-  return forms;
+function getForms() {
+  let query = db.any('SELECT * FROM form');
+  return doQuery(query);
 }
 
-async function addForm(formObj) {
-  let newForm;
+function getForm(id) {
+  let query = db.one('SELECT * FROM form WHERE id = ${id}', {id: id});
+  return doQuery(query);
+}
 
-  try {
-    newForm = await db.none('INSERT INTO form(config) VALUES($1)', [formObj]);
-  } catch (e) {
-    console.error(e);
-  }
-
-  return newForm;
+function addForm(form) {
+  let query = db.none('INSERT INTO form(config) VALUES($1)', [form]);
+  return doQuery(query);
 }
