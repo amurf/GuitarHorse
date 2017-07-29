@@ -8,7 +8,7 @@
 </template>
 <script>
 export default {
-  name: 'text',
+  name: 'scale',
   props: ['question', 'answers'],
   computed: {
     options: function() {
