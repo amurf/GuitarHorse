@@ -15,11 +15,12 @@
 //Pull in slot types
 import ghText from './Text';
 import ghScale from './Scale';
+import ghSelect from './Select';
 
 export default {
   name: 'question',
   props: ['number', 'question', 'answers'],
-  components: { ghText, ghScale },
+  components: { ghText, ghScale, ghSelect },
 }
 </script>
 <style lang="scss">
