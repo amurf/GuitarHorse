@@ -10,8 +10,11 @@
   "author": "Ashley Murphy",
   "license": "ISC",
   "dependencies": {
+    "good": "^7.2.0",
+    "good-console": "^6.4.0",
     "hapi": "^16.5.0",
     "hapi-auth-jwt2": "^7.3.0",
+    "jsonwebtoken": "^7.4.1",
     "pg-promise": "^6.3.5"
   }
 }

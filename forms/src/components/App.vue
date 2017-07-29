@@ -3,8 +3,7 @@
     <gh-navbar></gh-navbar>
     <!-- Begin page content -->
     <div class="container content">
-      <div class="mt-3"><h1>{{ form.config.name }}</h1></div>
-      <component :is="renderComponent" :form="form"></component>
+      <router-view :form="form" :form-id="formId"></router-view>
     </div>
     <gh-footer></gh-footer>
   </div>
@@ -33,12 +32,16 @@ export default {
   },
   data() {
     return {
-      form: undefined,
+      formId: undefined,
+      form: {},
     }
   },
   created() {
     axios.get('/api/config').then(
-      response => this.form = response.data.config
+    response => {
+      this.formId = response.data.id;
+      this.form = response.data.config;
+    }
     );
   },
 }

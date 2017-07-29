@@ -2,17 +2,34 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import BootstrapVue from 'bootstrap-vue';
 
-import App from './components/App';
 
 // Plugins
 Vue.config.productionTip = false
 Vue.use(Router);
 Vue.use(BootstrapVue);
 
-const routerView = { template: '<router-view></router-view>' };
+import App from './components/App';
+import Auth from './components/Auth';
+import Form from './components/Form';
+
+const router = new Router({
+  routes: [
+    {
+      path: '/',
+      name: 'Home',
+      component: Auth,
+    },
+    {
+      path: '/form',
+      name: 'Form',
+      component: Form,
+    },
+  ],
+});
 
 new Vue({
   el: '#app',
+  router,
   template: '<App />',
   components: { App },
 });

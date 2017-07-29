@@ -28,6 +28,7 @@ services:
     depends_on:
       - postgres
     environment:
+      JWT_SECRET: verysecret
       DB_URI: postgres://postgres:password@postgres:5432/guitarhorse
       SURVEY_ID: 1
       VIRTUAL_HOST: '*/api/*'
