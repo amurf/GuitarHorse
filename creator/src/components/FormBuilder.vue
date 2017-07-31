@@ -1,7 +1,8 @@
 <template>
-  <div class='container'>
-    <div class='row'>
-      <div class='col-9 content'>
+  <div class="surveybuilder__container">
+    <div class="surveybuilder__canvas">
+
+
         <h1>{{ form.name }}</h1>
         <draggable v-model="form.questions">
         <transition-group name="list-complete">
@@ -11,12 +12,12 @@
         </transition-group>
         </draggable>
         <p>output: <code>{{ form }}</code></p>
-      </div>
-      <div class='col sidebar'>
-        <input type="text" placeholder="Survey title" v-model="form.name" />
-        <b-btn variant="success" size="small" @click="saveForm">Save</b-btn>
-        <gh-component-list @question-added="addQuestion"></gh-component-list>
-      </div>
+
+    </div>
+    <div class="surveybuilder__sidebar">
+      <input type="text" placeholder="Survey title" v-model="form.name" />
+      <b-btn variant="success" size="small" @click="saveForm">Save</b-btn>
+      <gh-component-list @question-added="addQuestion"></gh-component-list>
     </div>
   </div>
 </template>
@@ -68,14 +69,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.content {
-  padding: 10px;
+
+//Formbuilder styles
+
+.surveybuilder__container {
+display:flex;
+flex-direction:row;
+align-items:stretch;
+background-color:green;
 }
 
-.sidebar {
-  padding: 10px;
+.surveybuilder__sidebar {
+flex: 1 1 30%;
+background-color:$dark-gray;
+border:1px solid black;
+padding:10px;
 }
 
+.surveybuilder__canvas {
+flex: 1 1 auto;
+background-color:$dark-gray;
+border:1px solid black;
+padding:10px;
+}
+
+//End Formbuilder styles
 
 .content {
   cursor: move;
