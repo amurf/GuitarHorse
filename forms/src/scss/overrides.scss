@@ -6,5 +6,11 @@
 $lightest-gray: #f8f9fa;
 $light-gray: #e9ecef;
 $not-so-light-gray: #dee2e6;
+$even-moreso-not-so-light-gray: rgba(#666666, 0.71);
+
+$border-width:1px;
+$border-color:$light-gray;
+$border-style:solid;
+$border-radius:5px;
 
 @import "~bootstrap/scss/bootstrap.scss";
