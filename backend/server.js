@@ -5,21 +5,11 @@ const Hapi = require('hapi');
 const server = new Hapi.Server();
 server.connection({ port: 80, routes: { cors: true }});
 
-const routes = require('./lib/routes');
 
 var validate = function (decoded, request, callback) {
-  console.log(" - - - - - - - decoded token:");
-  console.log(decoded);
-  console.log(" - - - - - - - request info:");
-  console.log(request.info);
-  console.log(" - - - - - - - user agent:");
-  console.log(request.headers['user-agent']);
-
   // Always valid atm.
 	return callback(null, true);
 };
-
-
 
 const hapiJwt = require('hapi-auth-jwt2');
 server.register(hapiJwt, function(error) {
@@ -32,16 +22,15 @@ server.register(hapiJwt, function(error) {
 		validateFunc: validate,
 		verifyOptions: { ignoreExpiration: true }
 	});
+
+  const routes = require('./lib/routes');
   routes.forEach(route => server.route(route));
 });
-
-
-
 
 // XXX: Temporary. Ensure we always have a form!
 const db = require('./lib/db');
 let form = {
-  name: "The Survey",
+  name: "The Form",
   questions: [
     { component: 'ghText', label: "First Question", name: "qOne"},
     { component: 'ghText', label: "Second Question", name: "qTwo"},
