@@ -6,6 +6,7 @@ let routes = [
   route('GET', '/config', config),
   route('GET', '/form', getForms),
   route('GET', '/form/{id}', getForm),
+  route('PUT', '/form/{id}', updateForm),
   route('POST', '/form', addForm),
   route('POST', '/session', generateSession),
 
@@ -34,6 +35,7 @@ function getAnswers(request, reply) {
   let answerId = request.auth.credentials.answerId;
   db.getAnswers(answerId).then(answers => reply(answers));
 }
+
 // Session
 function generateSession(request, reply) {
   db.generateSession(process.env.SURVEY_ID).then(answer => {
@@ -46,6 +48,12 @@ function generateSession(request, reply) {
 function addForm(request, reply) {
   db.addForm('stratdat', request.payload.config).then(
     form => reply({id: form.id})
+  );
+}
+
+function updateForm(request, reply) {
+  db.updateForm(request.params.id, request.payload.config).then(
+    form => reply({update: true})
   );
 }
 
