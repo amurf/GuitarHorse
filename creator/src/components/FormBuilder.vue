@@ -3,15 +3,15 @@
     <div class="surveybuilder__canvas">
 
 
-        <h1>{{ form.name }}</h1>
-        <draggable v-model="form.questions">
+      <h1>{{ form.name }}</h1>
+      <draggable v-model="form.questions">
         <transition-group name="list-complete">
           <gh-question v-for="(question, index) in form.questions" :key="question.name"
-                       :question="question" :number="index + 1" :answers="answers" class="list-complete-item">
+            :question="question" :number="index + 1" :answers="answers" class="list-complete-item">
           </gh-question>
         </transition-group>
-        </draggable>
-        <p>output: <code>{{ form }}</code></p>
+      </draggable>
+      <p>output: <code>{{ form }}</code></p>
 
     </div>
     <div class="surveybuilder__sidebar">
@@ -47,7 +47,7 @@ export default {
   created() {
     if (this.surveyId) {
       axios.get('http://localhost:5555/api/form/' + this.surveyId).then(
-        response => this.form = response.data.config
+      response => this.form = response.data.config
       );
     }
   },
@@ -56,13 +56,20 @@ export default {
       this.form.questions.push(question);
     },
     saveForm: function() {
-      axios.post('http://localhost:5555/api/form', {config: this.form}).then(
+
+      if (this.surveyId) {
+        axios.put('http://localhost:5555/api/form/' + this.surveyId, {config: this.form}).then(
+          response => console.log(response)
+        );
+      } else {
+        axios.post('http://localhost:5555/api/form', {config: this.form}).then(
         response => {
           if (!this.surveyId) { // update url if first save.
             this.$router.push({ name: 'Form', params: { surveyId: response.data.id }});
           }
         }
-      );
+        );
+      }
     },
   },
 }
@@ -73,24 +80,24 @@ export default {
 //Formbuilder styles
 
 .surveybuilder__container {
-display:flex;
-flex-direction:row;
-align-items:stretch;
-background-color:green;
+  display:flex;
+  flex-direction:row;
+  align-items:stretch;
+  background-color:green;
 }
 
 .surveybuilder__sidebar {
-flex: 1 1 30%;
-background-color:$dark-gray;
-border:1px solid black;
-padding:10px;
+  flex: 1 1 30%;
+  background-color:$dark-gray;
+  border:1px solid black;
+  padding:10px;
 }
 
 .surveybuilder__canvas {
-flex: 1 1 auto;
-background-color:$dark-gray;
-border:1px solid black;
-padding:10px;
+  flex: 1 1 auto;
+  background-color:$dark-gray;
+  border:1px solid black;
+  padding:10px;
 }
 
 //End Formbuilder styles
