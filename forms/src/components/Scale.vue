@@ -9,7 +9,23 @@
 <script>
 export default {
   name: 'scale',
-  props: ['question', 'answers'],
+  props: {
+    name: {
+      type: String,
+      label: "Field name",
+    },
+    mandatory: {
+      type: Boolean,
+      label: "Required:",
+    },
+    options: {
+      type: Array,
+      label: "List of options",
+    },
+
+    answers: Object,
+  },
+  //['question', 'answers'],
   computed: {
     options: function() {
       let questionOptions = question.options;
