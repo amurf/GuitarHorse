@@ -16,7 +16,7 @@ export default {
     },
     mandatory: {
       type: Boolean,
-      label: "Required:",
+      label: "Required",
     },
     options: {
       type: Array,
@@ -25,7 +25,6 @@ export default {
 
     answers: Object,
   },
-  //['question', 'answers'],
   computed: {
     options: function() {
       let questionOptions = question.options;

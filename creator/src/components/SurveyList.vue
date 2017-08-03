@@ -16,6 +16,7 @@
 
 
     <h1>Testing</h1>
+
     <gh-question-options :component="Scale"></gh-question-options>
   </div>
 </template>
