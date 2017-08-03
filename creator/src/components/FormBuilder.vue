@@ -1,10 +1,16 @@
 <template>
   <div class="surveybuilder__container">
-  <div>
+  <div class="surveybuilder__nav">
+    <ul>
+        <li>
+          Content
+        </li>
+    </ul>
+</div>
+
   <div class="surveybuilder__heading"><h1>GuitarHorse Formbuilder</h1></div>
     <div class="surveybuilder__canvas">
-
-
+    <div>
       <h1>{{ form.name }}</h1>
       <draggable v-model="form.questions">
         <transition-group name="list-complete">
@@ -14,16 +20,17 @@
         </transition-group>
       </draggable>
       <p>output: <code>{{ form }}</code></p>
-
+    </div>
     </div>
     <div class="surveybuilder__sidebar">
+    <div>
       <h2>Survey Config</h2>
       <input type="text" placeholder="Survey title" v-model="form.name" />
       <h2>Add components</h2>
       <b-btn variant="success" size="small" @click="saveForm">Save</b-btn>
       <gh-component-list @question-added="addQuestion"></gh-component-list>
     </div>
-  </div>
+    </div>
   </div>
 </template>
 
@@ -88,25 +95,20 @@ export default {
 flex:0 0 100%;
 }
 
-
-.blah {
-color:yellow;
+.surveybuilder__nav {
+  @extend .nav, .nav-tabs;
 }
 
 .surveybuilder__container {
-
-color:red;
-}
-
-.surveybuilder__container > div {
-@extend .panel-body;
+@extend .row;
 }
 
 .surveybuilder__sidebar {
-flex: 1 1 30%;
-background-color:$darker-gray;
-padding:10px;
+@extend .col-sm-3;
+}
 
+.surveybuilder__sidebar > div {
+@extend .card;
 }
 
 .surveybuilder__sidebar > div > button {
@@ -114,9 +116,11 @@ padding:10px;
 }
 
 .surveybuilder__canvas {
-flex: 1 1 70%;
-background-color:$dark-gray;
-padding:10px;
+@extend .col-sm-9;
+}
+
+.surveybuilder__canvas > div {
+//@extend .card;
 }
 
 //End Formbuilder styles

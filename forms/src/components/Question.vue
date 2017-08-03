@@ -1,7 +1,7 @@
 <template>
   <div class='question'>
   <div class='question__adminbar'>
-  <span>x</span><span>duplicate</span>
+  <span>delete</span><span>duplicate</span><span>edot</span>
   </div> <!-- Make me appear only in the builder Ash! and can you also append the class 'question__label--admin' to the div below -->
     <div class='question__label question__label--admin'>
       <span class='question__number'>{{ number }}</span>
@@ -32,22 +32,25 @@ export default {
   display:flex;
   flex-direction: column;
 
-  margin: 1em 0em;
   border-width: $border-width;
   border-style: $border-style;
   border-color: $border-color;
   border-radius: $border-radius;
+
+  margin:10px;
+
 }
 
 .question__adminbar {
 
 background-color:rgb(103, 103, 103);
-
+text-align: right;
 }
 
 .question__label {
   display:flex;
   justify-content:space-between;
+  flex-direction: row;
 
 
   background-color: $lightest-gray;
@@ -64,12 +67,18 @@ background-color:rgb(103, 103, 103);
   padding: 1em;
   border-bottom-left-radius: $border-radius;
   border-bottom-right-radius: $border-radius;
+  display: flex;
+}
+
+.question__input > input {
+  flex: 1 1 auto;
 }
 
 .question__label label {
+  flex:1 1 auto;
   display: flex;
-  flex-direction:row;
 
+  align-self: flex-start;
   margin-left:10px;
 }
 
@@ -78,18 +87,21 @@ background-color:rgb(103, 103, 103);
   border-top-right-radius: $border-radius;
 }
 
-.question__label--admin {
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-}
-
 .question__number {
-display:inline-block;
+display: flex;
 font-weight:bold;
+flex:0 0 auto;
 }
 
 .question__status {
+flex: 0 0 auto;
+}
 
+
+// Changes base question__label style to accomodate admin bar
+.question__label--admin {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 
 </style>
