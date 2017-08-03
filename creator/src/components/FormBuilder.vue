@@ -1,5 +1,7 @@
 <template>
   <div class="surveybuilder__container">
+  <div>
+  <div class="surveybuilder__heading"><h1>GuitarHorse Formbuilder</h1></div>
     <div class="surveybuilder__canvas">
 
 
@@ -15,10 +17,13 @@
 
     </div>
     <div class="surveybuilder__sidebar">
+      <h2>Survey Config</h2>
       <input type="text" placeholder="Survey title" v-model="form.name" />
+      <h2>Add components</h2>
       <b-btn variant="success" size="small" @click="saveForm">Save</b-btn>
       <gh-component-list @question-added="addQuestion"></gh-component-list>
     </div>
+  </div>
   </div>
 </template>
 
@@ -79,25 +84,39 @@ export default {
 
 //Formbuilder styles
 
+.surveybuilder__heading {
+flex:0 0 100%;
+}
+
+
+.blah {
+color:yellow;
+}
+
 .surveybuilder__container {
-  display:flex;
-  flex-direction:row;
-  align-items:stretch;
-  background-color:green;
+
+color:red;
+}
+
+.surveybuilder__container > div {
+@extend .panel-body;
 }
 
 .surveybuilder__sidebar {
-  flex: 1 1 30%;
-  background-color:$dark-gray;
-  border:1px solid black;
-  padding:10px;
+flex: 1 1 30%;
+background-color:$darker-gray;
+padding:10px;
+
+}
+
+.surveybuilder__sidebar > div > button {
+  padding:5px;
 }
 
 .surveybuilder__canvas {
-  flex: 1 1 auto;
-  background-color:$dark-gray;
-  border:1px solid black;
-  padding:10px;
+flex: 1 1 70%;
+background-color:$dark-gray;
+padding:10px;
 }
 
 //End Formbuilder styles

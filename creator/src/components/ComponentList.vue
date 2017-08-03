@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="btn-group-vertical">
     <b-btn variant="primary" size="md" @click="addText">Add Text</b-btn>
     <b-btn variant="primary" size="md" @click="addScale">Add Scale</b-btn>
     <b-btn variant="primary" size="md" @click="addSelect">Add Select</b-btn>

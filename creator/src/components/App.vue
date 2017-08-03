@@ -18,8 +18,7 @@ export default {
 </script>
 <style lang="scss">
 .container.content {
-  padding: 60px 15px 0;
-  border:1px solid red;
+  padding: 10px;
 }
 
 </style>
