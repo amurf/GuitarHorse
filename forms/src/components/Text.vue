@@ -1,10 +1,16 @@
 <template>
-  <input type="text" v-model="answers[question.name]" />
+  <input type="text" v-model="answers[name]" />
 </template>
 <script>
 export default {
   name: 'text',
-  props: ['question', 'answers'],
+  props: {
+    name: {
+      type: String,
+      label: "Field name",
+    },
+    answers: Object,
+  },
 }
 </script>
 <style lang="scss">

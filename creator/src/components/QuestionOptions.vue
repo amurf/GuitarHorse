@@ -1,17 +1,14 @@
 <template>
-  <div>
-    <h1>Will this work?</h1>
-    <code>{{ formConfig.questions }}</code>
-    <gh-fieldset :questions="formConfig.questions"></gh-fieldset>
-  </div>
+  <gh-fieldset :questions="formConfig.questions" :model="model"></gh-fieldset>
 </template>
 <script>
 
 import ghFieldset from "shared/Fieldset";
+import ghQuestion from "shared/Question";
 
 export default {
   name: 'gh-question-options',
-  props: ['component'],
+  props: ['component', 'model'],
   components: { ghFieldset },
   data() {
     return {
@@ -21,6 +18,10 @@ export default {
     };
   },
   created() {
+
+    let componentObject = ghQuestion.components[this.component];
+
+
     function getType (fn) {
       const match = fn && fn.toString().match(/^\s*function (\w+)/)
       return match ? match[1] : ''
@@ -48,32 +49,45 @@ export default {
     }
 
 
-    console.log(assertType("abc", String));
-    const props = this.component.props;
+    const props = componentObject.props;
+
 
     let typeToComponents = {
       'String'  : 'ghText',
-      //'Boolean' : 'checkbox',
+      'Boolean' : 'ghCheckbox',
       //'Array'   : 'tbc',
       'Array'   : 'ghText',
-      'Boolean' : 'ghText',
+      //'Boolean' : 'ghText',
     };
 
 
     let x = [];
 
-    Object.keys(this.component.props).forEach(
+    Object.keys(componentObject.props).forEach(
     prop => {
       let type = props[prop].type;
       if (type) {
 
         let stringifiedType = getType(type);
-        x.push({label: props[prop].label, component: typeToComponents[stringifiedType], name: prop});
-        console.log(prop, props[prop].label, getType(type));
+
+        let genComponent = {
+          label: props[prop].label,
+          component: typeToComponents[stringifiedType],
+          name: prop
+        };
+
+        // Better this?
+        if (stringifiedType == 'Boolean') {
+          genComponent.options = ["Required"];
+          delete genComponent.label;
+        }
+
+        x.push(genComponent);
       }
     }
     );
 
+    console.log(x);
     this.formConfig.questions = x;
   },
 }

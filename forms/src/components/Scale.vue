@@ -1,7 +1,7 @@
 <template>
   <ul>
-    <li v-for="option in question.options" :key="option">
-      <input type="radio" :id="option" :value="option" v-model="answers[question.name]">
+    <li v-for="option in options" :key="option">
+      <input type="radio" :id="option" :value="option" v-model="answers[name]">
       <label for="option">{{ option }}</label>
     </li>
   </ul>
@@ -24,21 +24,6 @@ export default {
     },
 
     answers: Object,
-  },
-  computed: {
-    options: function() {
-      let questionOptions = question.options;
-      if (Array.isArray(questionOptions)) {
-        return questionOptions;
-      }
-
-      var optionsRange = [];
-      for (var i = 1; i <= s; i++) {
-        optionsRange.push(i);
-      }
-
-      return optionsRange;
-    },
   },
 }
 </script>

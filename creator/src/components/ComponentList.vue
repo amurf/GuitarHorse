@@ -3,6 +3,7 @@
     <b-btn variant="primary" size="md" @click="addText">Add Text</b-btn>
     <b-btn variant="primary" size="md" @click="addScale">Add Scale</b-btn>
     <b-btn variant="primary" size="md" @click="addSelect">Add Select</b-btn>
+    <b-btn variant="primary" size="md" @click="addCheckbox">Add Checkbox</b-btn>
   </div>
 </template>
 
@@ -26,6 +27,7 @@ export default {
   methods: {
     addText: function() {
       let question = {
+        id: this.questionsAdded,
         name: 'example-' + this.questionsAdded,
         component: 'ghText',
         label: 'the example label'
@@ -35,6 +37,7 @@ export default {
     },
     addScale: function() {
       let question = {
+        id: this.questionsAdded,
         name: 'example-' + this.questionsAdded,
         component: 'ghScale',
         options: 3,
@@ -45,8 +48,20 @@ export default {
     },
     addSelect: function() {
       let question = {
+        id: this.questionsAdded,
         name: 'example-' + this.questionsAdded,
         component: 'ghSelect',
+        options: ['a', 'b', 'c'],
+        label: 'the example label'
+      };
+      this.$emit('question-added', question);
+      this.questionsAdded++;
+    },
+    addCheckbox: function() {
+      let question = {
+        id: this.questionsAdded,
+        name: 'example-' + this.questionsAdded,
+        component: 'ghCheckbox',
         options: ['a', 'b', 'c'],
         label: 'the example label'
       };

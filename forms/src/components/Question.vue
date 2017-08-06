@@ -6,7 +6,7 @@
       <span class='question-status'>* Required</span>
     </div>
     <div class='question-input'>
-      <component :is="question.component" :answers="answers" :question="question"></component>
+      <component :is="question.component" v-bind="question" :answers="answers"></component>
     </div>
   </div>
 </template>
@@ -16,11 +16,12 @@
 import ghText from './Text';
 import ghScale from './Scale';
 import ghSelect from './Select';
+import ghCheckbox from './Checkbox';
 
 export default {
   name: 'question',
   props: ['number', 'question', 'answers'],
-  components: { ghText, ghScale, ghSelect },
+  components: { ghText, ghScale, ghSelect, ghCheckbox },
 }
 </script>
 <style lang="scss">

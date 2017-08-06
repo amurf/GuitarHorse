@@ -1,27 +1,23 @@
 <template>
   <div>
-    <h1>Questions</h1>
-    <code>{{ answers }}</code>
     <div v-for="question in questions">
       <label>{{ question.label }}</label>
-      <component :is="question.component" :answers="answers" :question="question"></component>
+      <component :is="question.component" :answers="model" v-bind="question">
+      </component>
     </div>
   </div>
 </template>
 
 <script>
-import ghText from "shared/Text"
+// This is just a custom layout for a question type. Consider a better way to do this in the future.
+
+import ghText from './Text';
+import ghCheckbox from './Checkbox';
 
 export default {
   name: 'gh-fieldset',
-  components: { ghText },
   props: ['questions', 'model'],
-  data() {
-    return {
-      answers: {},
-    };
-  },
-  created() { },
+  components: { ghText, ghCheckbox },
 };
 
 </script>

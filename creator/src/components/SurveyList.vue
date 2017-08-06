@@ -13,28 +13,17 @@
         {{ form.config.name }}
       </b-btn>
     </div>
-
-
-    <h1>Testing</h1>
-
-    <gh-question-options :component="Scale"></gh-question-options>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 
-import ghScale from 'shared/Scale';
-
-import ghQuestionOptions from './QuestionOptions';
-
 export default {
   name: 'survey-list',
-  components: { ghScale, ghQuestionOptions },
   data() {
     return {
       forms: undefined,
-      Scale: ghScale,
     };
   },
   created() {

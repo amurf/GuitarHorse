@@ -1,18 +1,15 @@
 <template>
   <div class="surveybuilder__container">
     <div class="surveybuilder__canvas">
-
-
       <h1>{{ form.name }}</h1>
       <draggable v-model="form.questions">
         <transition-group name="list-complete">
-          <gh-question v-for="(question, index) in form.questions" :key="question.name"
+          <gh-question-builder v-for="(question, index) in form.questions" :key="question.id"
             :question="question" :number="index + 1" :answers="answers" class="list-complete-item">
-          </gh-question>
+          </gh-question-builder>
         </transition-group>
       </draggable>
       <p>output: <code>{{ form }}</code></p>
-
     </div>
     <div class="surveybuilder__sidebar">
       <input type="text" placeholder="Survey title" v-model="form.name" />
@@ -24,8 +21,7 @@
 
 <script>
 import ghComponentList from './ComponentList';
-
-import ghQuestion from 'shared/Question';
+import ghQuestionBuilder from './QuestionBuilder';
 
 import axios from 'axios';
 import draggable from 'vuedraggable'
@@ -33,7 +29,7 @@ import draggable from 'vuedraggable'
 export default {
   name: 'form-builder',
   props: ['surveyId'],
-  components: { ghComponentList, ghQuestion, draggable },
+  components: { ghComponentList, ghQuestionBuilder, draggable },
   data() {
     return {
       answers: {},
