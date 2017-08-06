@@ -37,6 +37,7 @@ let form = {
     { component: 'ghSelect', label: "Third question", name: "qThree", options: ["one", "two", "three" ], id: 3},
     { component: 'ghScale', label: "Fourth question", name: "qFour", options: [1,2,3], id: 4},
     { component: 'ghCheckbox', label: "Fifth question", name: "qFive", options: ['a', 'b', 'c'], id: 5},
+    { component: 'ghCheckbox', label: "Sixth Question", name: "qSix", options: ['Required'], id: 6},
   ],
 };
 
