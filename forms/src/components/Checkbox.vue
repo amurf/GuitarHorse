@@ -4,7 +4,6 @@
       <input type="checkbox" :id="option" :value="option" v-model="answers[name]">
       <label for="option">{{ option }}</label>
     </li>
-    {{ answers }}
   </ul>
 </template>
 <script>
