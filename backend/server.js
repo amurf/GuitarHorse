@@ -32,10 +32,11 @@ const db = require('./lib/db');
 let form = {
   name: "The Form",
   questions: [
-    { component: 'ghText', label: "First Question", name: "qOne"},
-    { component: 'ghText', label: "Second Question", name: "qTwo"},
-    { component: 'ghSelect', label: "Third question", name: "qThree", options: ["one", "two", "three" ] },
-    { component: 'ghScale', label: "Fourth question", name: "qFour", options: 3 },
+    { component: 'ghText', label: "First Question", name: "qOne", id: 1},
+    { component: 'ghText', label: "Second Question", name: "qTwo", id: 2},
+    { component: 'ghSelect', label: "Third question", name: "qThree", options: ["one", "two", "three" ], id: 3},
+    { component: 'ghScale', label: "Fourth question", name: "qFour", options: [1,2,3], id: 4},
+    { component: 'ghCheckbox', label: "Fifth question", name: "qFive", options: ['a', 'b', 'c'], id: 5},
   ],
 };
 
