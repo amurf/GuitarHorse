@@ -9,6 +9,10 @@ export default {
       type: String,
       label: "Field name",
     },
+    mandatory: {
+      type: Boolean,
+      label: "Mandatory",
+    },
     answers: Object,
   },
 }
