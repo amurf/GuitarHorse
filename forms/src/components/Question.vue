@@ -3,7 +3,7 @@
     <div class='question-label'>
       <span class='question-number'>{{ number }}</span>
       <label>{{ question.label }}</label>
-      <span class='question-status'>* Required</span>
+      <span class='question-status' v-if="question.mandatory">* Required</span>
     </div>
     <div class='question-input'>
       <component :is="question.component" v-bind="question" :answers="answers"></component>
@@ -24,7 +24,7 @@ export default {
   components: { ghText, ghScale, ghSelect, ghCheckbox },
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 
 .question {
   margin: 1em 0em;
@@ -41,7 +41,6 @@ export default {
   border-top-left-radius: $border-radius;
   border-top-right-radius: $border-radius;
   border-bottom:$border-color $border-style $border-width;
-
   display:flex;
   justify-content:space-between;
 }
