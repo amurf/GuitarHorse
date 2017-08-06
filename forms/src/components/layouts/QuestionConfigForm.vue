@@ -11,8 +11,8 @@
 <script>
 // This is just a custom layout for a question type. Consider a better way to do this in the future.
 
-import ghText from './Text';
-import ghCheckbox from './Checkbox';
+import ghText from '../Text';
+import ghCheckbox from '../Checkbox';
 
 export default {
   name: 'gh-fieldset',

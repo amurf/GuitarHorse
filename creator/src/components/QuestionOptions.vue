@@ -1,15 +1,17 @@
 <template>
-  <gh-fieldset :questions="formConfig.questions" :model="model"></gh-fieldset>
+  <div class='question-options'>
+    <gh-question-config-form :questions="formConfig.questions" :model="model"></gh-question-config-form>
+  </div>
 </template>
 <script>
 
-import ghFieldset from "shared/Fieldset";
+import { ghQuestionConfigForm } from "shared/layouts";
 import ghQuestion from "shared/Question";
 
 export default {
   name: 'gh-question-options',
   props: ['component', 'model'],
-  components: { ghFieldset },
+  components: { ghQuestionConfigForm },
   data() {
     return {
       formConfig: {
@@ -51,17 +53,19 @@ export default {
 
     const props = componentObject.props;
 
-
     let typeToComponents = {
       'String'  : 'ghText',
       'Boolean' : 'ghCheckbox',
-      //'Array'   : 'tbc',
       'Array'   : 'ghText',
-      //'Boolean' : 'ghText',
+      //'Array'   : 'tbc',
     };
 
-
     let x = [];
+    x.push({
+      label: 'Label',
+      component: 'ghText',
+      name: 'label',
+    });
 
     Object.keys(componentObject.props).forEach(
     prop => {
@@ -78,7 +82,7 @@ export default {
 
         // Better this?
         if (stringifiedType == 'Boolean') {
-          genComponent.options = ["Required"];
+          genComponent.options = ["Mandatory"];
           delete genComponent.label;
         }
 
@@ -87,10 +91,18 @@ export default {
     }
     );
 
-    console.log(x);
     this.formConfig.questions = x;
   },
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
+.question-options {
+  margin: 1em 0em;
+  padding: 1em;
+  border-width: $border-width;
+  border-style: $border-style;
+  border-color: $border-color;
+  border-radius: $border-radius;
+  background-color: $lightest-gray;
+}
 </style>

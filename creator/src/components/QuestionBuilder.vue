@@ -1,7 +1,7 @@
 <template>
   <div class='question-builder'>
-      <gh-question :question="question" :number="number" :answers="answers" class="list-complete-item"></gh-question>
-      <gh-question-options :component="question.component" :model="question"></gh-question-options>
+    <gh-question :question="question" :number="number" :answers="answers" class="list-complete-item"></gh-question>
+    <gh-question-options :component="question.component" :model="question"></gh-question-options>
   </div>
 </template>
 
@@ -18,17 +18,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.heading {
-  padding: 20px 0px;
+
+.question-builder .question, .question-builder .question-options {
+  margin: 0;
 }
 
-h1, .new-survey {
-  display: inline;
+.question-builder .question, .question-builder .question-input {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
-button, a {
-  display: block;
-  width: 100%;
-  margin-bottom: 5px;
+.question-builder .question-options {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.question-builder {
+  margin: 1em 0;
 }
 </style>
