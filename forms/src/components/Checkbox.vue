@@ -25,20 +25,6 @@ export default {
     },
     answers: Object,
   },
-  computed: {
-    model: {
-      get: function() {
-        if (!this.answers[this.name]) {
-          return [];
-        }
-        return this.answers[this.name];
-      },
-      set: function(newValue) {
-        console.log("New:", newValue);
-        this.answers[this.name] = newValue;
-      },
-    },
-  },
   created() {
     // Initialise as Array if multiple options. Vue won't watch this
     // unless we use $set.
