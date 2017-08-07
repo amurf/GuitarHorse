@@ -82,8 +82,8 @@ export default {
 
         // Better this?
         if (stringifiedType == 'Boolean') {
-          genComponent.options = ["Mandatory"];
-          delete genComponent.label;
+          genComponent.options = [""];
+          // Reinstated label - Uh tried to remove 'Mandatory' - Ash help I am not good with computer.
         }
 
         x.push(genComponent);
@@ -96,13 +96,13 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+
 .question-options {
-  margin: 1em 0em;
-  padding: 1em;
   border-width: $border-width;
   border-style: $border-style;
   border-color: $border-color;
   border-radius: $border-radius;
   background-color: $lightest-gray;
 }
+
 </style>

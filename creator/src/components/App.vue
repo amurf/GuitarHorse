@@ -1,7 +1,7 @@
 <template>
   <div>
     <gh-navbar></gh-navbar>
-    <div class="container content">
+    <div class="content">
       <router-view></router-view>
     </div>
     <gh-footer></gh-footer>
