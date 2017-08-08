@@ -34,16 +34,16 @@ align-self: flex-start;
 }
 
 input {
-    flex:1 0 auto;
-    align-self: flex-end;
+  flex:1 0 auto;
+  align-self: flex-end;
 }
 
 ul {
-    padding-left:0rem;
+  padding-left:0rem;
 }
 
 ul li {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 </style>
