@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <b-btn variant="primary" size="md" @click="addText">Add Text</b-btn>
-    <b-btn variant="primary" size="md" @click="addScale">Add Scale</b-btn>
-    <b-btn variant="primary" size="md" @click="addSelect">Add Select</b-btn>
-    <b-btn variant="primary" size="md" @click="addCheckbox">Add Checkbox</b-btn>
+  <div class="vert">
+    <b-btn size="md" @click="addText">Add Text</b-btn>
+    <b-btn size="md" @click="addScale">Add Scale</b-btn>
+    <b-btn size="md" @click="addSelect">Add Select</b-btn>
+    <b-btn size="md" @click="addCheckbox">Add Checkbox</b-btn>
   </div>
 </template>
 
@@ -73,9 +73,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 button {
   width: 100%;
   margin-bottom: 5px 0;
+}
+
+.vert {
+  @extend .btn-group-vertical;
 }
 
 </style>
