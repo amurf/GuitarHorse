@@ -14,21 +14,23 @@
     <div class="surveybuilder__sidebar">
       <div class="surveybuilder__sidebar__options">
 
-      <div class="surveybuilder__sidebar__title">
-        <div class="surveybuilder__sidebar__title__header">
-          <span>Survey Configuration</span>
-        </div>
+        <div class="surveybuilder__sidebar__title">
+          <div class="surveybuilder__sidebar__title__header">
+            <span>Survey Configuration</span>
+          </div>
         <div>
           <input type="text" placeholder="Survey title" v-model="form.name" />
         </div>
       </div>
 
-      <h2>Components</h2>
-      <gh-component-list @question-added="addQuestion"></gh-component-list>
+      <div class="surveybuilder__sidebar__components">
+        <span>Components</span>
+        <gh-component-list @question-added="addQuestion"></gh-component-list>
+      </div>
 
       </div>
       <div class="surveybuilder__sidebar__save">
-      <b-btn variant="success" size="small" @click="saveForm">Save</b-btn>
+      <b-btn variant="primary" size="block" block="true" @click="saveForm">Save</b-btn>
       </div>
 
     </div>
@@ -100,7 +102,7 @@ export default {
 .surveybuilder__sidebar {
   display: flex;
   flex-direction: column;
-  flex: 1 1 30%;
+  flex: 0 0 auto;
   justify-content: space-between;
 
   background-color:$not-so-light-gray;
@@ -109,9 +111,24 @@ export default {
 }
 
 .surveybuilder__sidebar__options {
-
   align-self: flex-start;
   flex:0 0 auto;
+}
+
+.surveybuilder__sidebar__options > div {
+  margin-bottom:10px;
+}
+
+.surveybuilder__sidebar__components {
+  @extend .card;
+}
+
+.surveybuilder__sidebar__components > span {
+  @extend .card-header;
+}
+
+.surveybuilder__sidebar__components > div {
+  @extend .card-block;
 }
 
 .surveybuilder__sidebar__title {
@@ -127,8 +144,7 @@ export default {
 }
 
 .surveybuilder__sidebar__save {
-  flex:0 1 auto;
-  align-self: flex-end;
+  flex:1 1 auto;
 }
 
 .surveybuilder__canvas {
