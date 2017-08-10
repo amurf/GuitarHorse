@@ -14,4 +14,6 @@ $border-color:$light-gray;
 $border-style:solid;
 $border-radius:5px;
 
+$fa-font-path: "~font-awesome/fonts" !default;
+@import "~font-awesome/scss/font-awesome.scss";
 @import "~bootstrap/scss/bootstrap.scss";
