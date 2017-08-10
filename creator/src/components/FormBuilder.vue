@@ -13,24 +13,23 @@
     </div>
     <div class="surveybuilder__sidebar">
       <div class="surveybuilder__sidebar__options">
-
         <div class="surveybuilder__sidebar__title">
           <div class="surveybuilder__sidebar__title__header">
             <span>Survey Configuration</span>
           </div>
-        <div>
-          <input type="text" placeholder="Survey title" v-model="form.name" />
+          <div>
+            <input type="text" placeholder="Survey title" v-model="form.name" />
+          </div>
         </div>
-      </div>
 
-      <div class="surveybuilder__sidebar__components">
-        <span>Components</span>
-        <gh-component-list @question-added="addQuestion"></gh-component-list>
-      </div>
+        <div class="surveybuilder__sidebar__components">
+          <span>Components</span>
+          <gh-component-list @question-added="addQuestion"></gh-component-list>
+        </div>
 
       </div>
       <div class="surveybuilder__sidebar__save">
-      <b-btn variant="primary" size="block" block="true" @click="saveForm">Save</b-btn>
+        <b-btn variant="primary" size="block"  @click="saveForm">Save</b-btn>
       </div>
 
     </div>
@@ -73,7 +72,7 @@ export default {
 
       if (this.surveyId) {
         axios.put('http://localhost:5555/api/form/' + this.surveyId, {config: this.form}).then(
-          response => console.log(response)
+        response => console.log(response)
         );
       } else {
         axios.post('http://localhost:5555/api/form', {config: this.form}).then(
@@ -92,7 +91,6 @@ export default {
 <style lang="scss" scoped>
 
 //Formbuilder styles
-
 .surveybuilder__container {
   display:flex;
   flex-direction:row;
@@ -174,9 +172,9 @@ export default {
 
 //output container
 .output {
-background-color: $not-so-light-gray;
-border-radius:5px;
-padding:10px;
+  background-color: $not-so-light-gray;
+  border-radius:5px;
+  padding:10px;
 }
 
 </style>
