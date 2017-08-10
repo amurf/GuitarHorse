@@ -13,6 +13,13 @@ $border-color:$light-gray;
 $border-style:solid;
 $border-radius:5px;
 
+//Makes the containing element full height of the browser - Fixes sticky footer issue.
+html {
+  min-height: 100%;
+  position: absolute;
+  width:100%;
+}
+
 $fa-font-path: "~font-awesome/fonts" !default;
 @import "~font-awesome/scss/font-awesome.scss";
 @import "~bootstrap/scss/bootstrap.scss";

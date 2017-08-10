@@ -28,9 +28,7 @@ export default {
   },
   data() {
     return {
-      answers: {
-        qTwo: "Default response",
-      },
+      answers: {},
     };
   },
   created() {
