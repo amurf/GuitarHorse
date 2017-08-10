@@ -19,39 +19,18 @@ export default {
       },
     };
   },
-  created() {
-
-    let componentObject = ghQuestion.components[this.component];
-
-
-    function getType (fn) {
+  methods: {
+    // Stolen from vuejs prop inspection code.
+    getType(fn) {
       const match = fn && fn.toString().match(/^\s*function (\w+)/)
       return match ? match[1] : ''
-    }
+    },
+  },
+  created() {
+    let vm = this; // forEach loop overwrites this
 
-
-    const simpleCheckRE = /^(String|Number|Boolean|Function|Symbol)$/
-
-    function assertType (value, type) {
-      let valid
-      const expectedType = getType(type)
-      if (simpleCheckRE.test(expectedType)) {
-        valid = typeof value === expectedType.toLowerCase()
-      } else if (expectedType === 'Object') {
-        valid = isPlainObject(value)
-      } else if (expectedType === 'Array') {
-        valid = Array.isArray(value)
-      } else {
-        valid = value instanceof type
-      }
-      return {
-        valid,
-        expectedType
-      }
-    }
-
-
-    const props = componentObject.props;
+    let componentObject = ghQuestion.components[this.component];
+    const props         = componentObject.props;
 
     let typeToComponents = {
       'String'  : 'ghText',
@@ -60,38 +39,35 @@ export default {
       //'Array'   : 'tbc',
     };
 
-    let x = [];
-    x.push({
+    // Populated with defaults that apply to every single field
+    let questions = [{
       label: 'Label',
       component: 'ghText',
       name: 'label',
-    });
+    }];
 
-    Object.keys(componentObject.props).forEach(
-    prop => {
-      let type = props[prop].type;
+    Object.keys(componentObject.props).forEach(function(propName) {
+      let type = props[propName].type;
+      // Skip anything without a type property
+      // Maybe this should look at the label property?
       if (type) {
-
-        let stringifiedType = getType(type);
-
-        let genComponent = {
-          label: props[prop].label,
+        let stringifiedType = vm.getType(type);
+        let newQuestion = {
+          label: props[propName].label,
           component: typeToComponents[stringifiedType],
-          name: prop
+          name: propName,
         };
 
-        // Better this?
+        // Better this? Booleans need options.
         if (stringifiedType == 'Boolean') {
-          genComponent.options = [""];
-          // Reinstated label - Uh tried to remove 'Mandatory' - Ash help I am not good with computer.
+          newQuestion.options = [""];
         }
 
-        x.push(genComponent);
+        questions.push(newQuestion);
       }
-    }
-    );
+    });
 
-    this.formConfig.questions = x;
+    vm.formConfig.questions = questions;
   },
 }
 </script>
