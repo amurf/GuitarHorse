@@ -6,12 +6,12 @@
       </div>
     </div>
     <div class='row'>
-      <b-btn to="/form" type="sm" variant="success" class='new-survey'>New Survey</b-btn>
-      <b-btn v-for="form in forms" :key="form.id"
+      <b-button to="/form" type="sm" variant="success" class='new-survey'>New Survey</b-button>
+      <b-button v-for="form in forms" :key="form.id"
              :to="{name: 'Form', params: {surveyId: form.id}}"
              type="sm" variant="primary">
         {{ form.config.name }}
-      </b-btn>
+      </b-button>
     </div>
   </div>
 </template>
