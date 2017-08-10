@@ -13,6 +13,10 @@ Vue.use(BootstrapVue);
 import FormBuilder from './components/FormBuilder';
 import SurveyList from './components/SurveyList';
 
+import "./scss/gh.scss";
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+
+
 let router = new Router({
   routes: [
     {

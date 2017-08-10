@@ -47,7 +47,11 @@ module.exports = {
               {
                 loader: 'sass-resources-loader',
                 options: {
-                  resources: '/build/src/scss/overrides.scss',
+                  resources: [
+                    '/build/src/scss/_bootstrap-variables.scss',
+                    '/build/src/scss/_variables.scss',
+                    '/build/src/scss/_bootstrap-used-in-components.scss',
+                  ],
                 },
               },
             ],
@@ -66,7 +70,10 @@ module.exports = {
             },
           },
         ],
-        exclude: /(node_modules)/,
+      },
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ],
       },
       {
         test: /\.js$/,
