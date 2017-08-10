@@ -12,6 +12,9 @@ import App from './components/App';
 import Auth from './components/Auth';
 import Form from './components/Form';
 
+import "./scss/gh.scss";
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+
 const router = new Router({
   routes: [
     {

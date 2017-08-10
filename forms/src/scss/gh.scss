@@ -1,0 +1,16 @@
+// Overrides before bootstrap.
+
+@import "_variables.scss";
+@import "_bootstrap-used-in-components.scss";
+
+html {
+  min-height: 100%;
+  position: absolute;
+  width:100%;
+}
+
+// This is needed for font-awesome to find the fonts.
+$fa-font-path: "~font-awesome/fonts" !default;
+
+@import "~font-awesome/scss/font-awesome.scss";
+@import "~bootstrap/scss/bootstrap.scss";
