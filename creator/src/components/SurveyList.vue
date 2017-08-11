@@ -6,9 +6,9 @@
       </div>
     </div>
     <div class='row'>
-      <b-button to="/form" type="sm" variant="success" class='new-survey'>New Survey</b-button>
+      <b-button to="/form/content" type="sm" variant="success" class='new-survey'>New Survey</b-button>
       <b-button v-for="form in forms" :key="form.id"
-             :to="{name: 'Form', params: {surveyId: form.id}}"
+             :to="{name: 'form-summary', params: {surveyId: form.id}}"
              type="sm" variant="primary">
         {{ form.config.name }}
       </b-button>

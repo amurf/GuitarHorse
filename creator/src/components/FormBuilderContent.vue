@@ -9,7 +9,6 @@
           </gh-question-builder>
         </transition-group>
       </draggable>
-      <div class="output">output: <code>{{ form }}</code></div>
     </div>
     <div class="surveybuilder__sidebar">
       <div class="surveybuilder__sidebar__options">
@@ -44,43 +43,30 @@ import axios from 'axios';
 import draggable from 'vuedraggable'
 
 export default {
-  name: 'form-builder',
-  props: ['surveyId'],
+  name: 'form-builder-content',
+  props: ['surveyId', 'form'],
   components: { ghComponentList, ghQuestionBuilder, draggable },
   data() {
     return {
       answers: {},
-      form: {
-        name: undefined,
-        questions: [],
-        sections: undefined,
-      },
     };
-  },
-  created() {
-    if (this.surveyId) {
-      axios.get('http://localhost:5555/api/form/' + this.surveyId).then(
-      response => this.form = response.data.config
-      );
-    }
   },
   methods: {
     addQuestion: function(question) {
       this.form.questions.push(question);
     },
     saveForm: function() {
-
       if (this.surveyId) {
         axios.put('http://localhost:5555/api/form/' + this.surveyId, {config: this.form}).then(
-        response => console.log(response)
+          response => console.log(response)
         );
       } else {
         axios.post('http://localhost:5555/api/form', {config: this.form}).then(
-        response => {
-          if (!this.surveyId) { // update url if first save.
-            this.$router.push({ name: 'Form', params: { surveyId: response.data.id }});
+          response => {
+            if (!this.surveyId) { // update url if first save.
+              this.$router.push({ name: 'form-content', params: { surveyId: response.data.id }});
+            }
           }
-        }
         );
       }
     },

@@ -10,7 +10,12 @@ Vue.config.productionTip = false
 Vue.use(Router);
 Vue.use(BootstrapVue);
 
-import FormBuilder from './components/FormBuilder';
+import FormBuilderSummary from './components/FormBuilderSummary';
+import FormBuilderConfig from './components/FormBuilderConfig';
+import FormBuilderContent from './components/FormBuilderContent';
+import FormBuilderJSON from './components/FormBuilderJSON';
+import FormBuilderNotes from './components/FormBuilderNotes';
+import FormView from './components/FormView';
 import SurveyList from './components/SurveyList';
 
 import "./scss/gh.scss";
@@ -26,9 +31,40 @@ let router = new Router({
     },
     {
       path: '/form/:surveyId?',
-      name: 'Form',
-      component: FormBuilder,
+      component: FormView,
       props: true,
+      children: [
+        {
+          path: 'summary',
+          name: 'form-summary',
+          component: FormBuilderSummary,
+          props: true,
+        },
+        {
+          path: 'config',
+          name: 'form-config',
+          component: FormBuilderConfig,
+          props: true,
+        },
+        {
+          path: 'content',
+          name: 'form-content',
+          component: FormBuilderContent,
+          props: true,
+        },
+        {
+          path: 'json',
+          name: 'form-content-json',
+          component: FormBuilderJSON,
+          props: true,
+        },
+        {
+          path: 'notes',
+          name: 'form-notes',
+          component: FormBuilderNotes,
+          props: true,
+        },
+      ],
     },
   ],
 });
