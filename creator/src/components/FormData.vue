@@ -2,7 +2,7 @@
   <div>
   <h1>Form Data</h1>
   <b-button>Download CSV</b-button>
-  <b-table hover show-empty
+  <b-table hover show-empty responsive
            :items="answers"
            :fields="tableConfig">
   </b-table>
