@@ -48,7 +48,6 @@ module.exports = {
                 loader: 'sass-resources-loader',
                 options: {
                   resources: [
-                    '/build/src/scss/_bootstrap-variables.scss',
                     '/build/src/scss/_variables.scss',
                     '/build/src/scss/_bootstrap-used-in-components.scss',
                   ],
