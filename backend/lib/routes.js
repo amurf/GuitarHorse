@@ -7,6 +7,9 @@ let routes = [
   route('GET', '/form', getForms),
   route('GET', '/form/{id}', getForm),
   route('PUT', '/form/{id}', updateForm),
+
+  route('GET', '/form/{id}/answer', getFormAnswers),
+
   route('POST', '/form', addForm),
   route('POST', '/session', generateSession),
 
@@ -21,6 +24,12 @@ function ping(request, reply) {
 function config(request, reply) {
   let surveyId = process.env.SURVEY_ID;
   db.getForm(surveyId).then(form => reply(form));
+}
+
+function getFormAnswers(request, reply) {
+  db.getAllAnswers(request.params.id).then(
+      answers => reply(answers)
+  );
 }
 
 // Answers

@@ -7,6 +7,7 @@
         <b-nav-item :to="{name: 'form-content', params: $route.params}">Content</b-nav-item>
         <b-nav-item :to="{name: 'form-content-json', params: $route.params}">JSON</b-nav-item>
         <b-nav-item :to="{name: 'form-notes', params: $route.params }">Notes</b-nav-item>
+        <b-nav-item :to="{name: 'form-data', params: $route.params }">Data</b-nav-item>
       </template>
     </b-tabs>
     <router-view :form="form"></router-view>

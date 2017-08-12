@@ -15,6 +15,7 @@ import FormBuilderConfig from './components/FormBuilderConfig';
 import FormBuilderContent from './components/FormBuilderContent';
 import FormBuilderJSON from './components/FormBuilderJSON';
 import FormBuilderNotes from './components/FormBuilderNotes';
+import FormData from './components/FormData';
 import FormView from './components/FormView';
 import SurveyList from './components/SurveyList';
 
@@ -62,6 +63,12 @@ let router = new Router({
           path: 'notes',
           name: 'form-notes',
           component: FormBuilderNotes,
+          props: true,
+        },
+        {
+          path: 'data',
+          name: 'form-data',
+          component: FormData,
           props: true,
         },
       ],

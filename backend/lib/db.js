@@ -8,6 +8,7 @@ module.exports = {
   addForm: addForm,
 
   getAnswers: getAnswers,
+  getAllAnswers: getAllAnswers,
   saveAnswers: saveAnswers,
 
   generateSession: generateSession,
@@ -30,6 +31,14 @@ function getAnswers(answerId) {
   let query = db.one('SELECT answers FROM answer WHERE id = ${id}', {id: answerId});
   return doQuery(query);
 }
+
+function getAllAnswers(formId) {
+  let queryString = 'SELECT answer.* FROM session LEFT JOIN answer ON (session.id = answer.session_id)'
+                      + 'WHERE session.form_id = ${id}';
+
+  let query = db.any(queryString, {id: formId});
+  return doQuery(query);
+};
 
 function getForms() {
   let query = db.any('SELECT * FROM form');
