@@ -1,9 +1,7 @@
 <template>
-  <b-navbar toggleable type="inverse" variant="inverse">
+  <b-navbar toggleable type="inverse" variant="primary" toggle-breakpoint="md">
     <b-nav-toggle target="nav_collapse"></b-nav-toggle>
-    <b-link class="navbar-brand" to="/">
-      <span>GuitarHorse</span>
-    </b-link>
+    <b-navbar-brand href="#" to="/">Creator</b-navbar-brand>
     <b-collapse is-nav id="nav_collapse">
       <b-nav is-nav-bar>
         <b-nav-item>Support</b-nav-item>
@@ -11,21 +9,7 @@
         <b-nav-item>Contact Us</b-nav-item>
       </b-nav>
       <b-nav is-nav-bar class="ml-auto">
-        <!-- Navbar dropdowns -->
-        <b-nav-item-dropdown text="Lang" right>
-          <b-dropdown-item to="#">EN</b-dropdown-item>
-          <b-dropdown-item to="#">ES</b-dropdown-item>
-          <b-dropdown-item to="#">RU</b-dropdown-item>
-          <b-dropdown-item to="#">FA</b-dropdown-item>
-        </b-nav-item-dropdown>
-        <b-nav-item-dropdown right>
-          <!-- Using button-content slot -->
-          <template slot="button-content">
-            <span style="font-weight: bold;">User</span>
-          </template>
-          <b-dropdown-item to="#">Profile</b-dropdown-item>
-          <b-dropdown-item to="#">Signout</b-dropdown-item>
-        </b-nav-item-dropdown>
+        <b-nav-item>Logout</b-nav-item>
       </b-nav>
     </b-collapse>
   </b-navbar>
