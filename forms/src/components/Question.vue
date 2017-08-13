@@ -1,5 +1,6 @@
 <template>
   <div class='question'>
+    {{ errors }}
     <div class='question-label'>
       <span class='question-number'>{{ number }}</span>
       <label>{{ question.label }}</label>
@@ -22,6 +23,48 @@ export default {
   name: 'question',
   props: ['number', 'question', 'answers'],
   components: { ghText, ghScale, ghSelect, ghCheckbox },
+  computed: {
+    errors() {
+      let validators = this.$options.validations();
+      let val        = this.answers[this.question.name];
+
+      let errors = {};
+
+      let vm = this;
+
+      validators.forEach(validator => {
+        if (!validator.func(val, 6)) {
+          if (!errors[vm.question.name]) { errors[vm.question.name] = []; }
+          errors[vm.question.name].push(validator.name);
+        }
+      });
+
+      return errors;
+    },
+  },
+  validations() {
+
+    // I think we should store any validation-style thing in
+    // question.validations as an array of functions..?
+
+    function required(val) {
+      return ( val && val !== undefined );
+    }
+
+    function greaterThan(val, greater) {
+      return ( val && val > greater );
+    }
+
+    let validations = [];
+    validations.push({func: required, name: 'Required'});
+    validations.push({func: greaterThan, name: 'Greater'});
+
+    let questionValidations = this.question;
+    // Generate required validation functions here.
+
+
+    return validations;
+  },
 }
 </script>
 
@@ -76,9 +119,7 @@ export default {
 }
 
 .question-number {
-
-display:inline-block;
-
+  display:inline-block;
 }
 
 .question-status {
