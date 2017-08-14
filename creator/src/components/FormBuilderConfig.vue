@@ -1,5 +1,11 @@
 <template>
-  <h1>Config</h1>
+
+<div class="tab__container">
+
+<h1>Config</h1>
+
+</div>
+
 </template>
 <script>
 export default {
@@ -8,4 +14,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+
 </style>

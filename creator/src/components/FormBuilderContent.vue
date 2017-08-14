@@ -1,5 +1,5 @@
 <template>
-  <div class="surveybuilder__container">
+  <div class="tab__container">
     <div class="surveybuilder__canvas">
       <h1>{{ form.name }}</h1>
       <draggable v-model="form.questions">
@@ -77,12 +77,6 @@ export default {
 <style lang="scss" scoped>
 
 //Formbuilder styles
-.surveybuilder__container {
-  display:flex;
-  flex-direction:row;
-  align-items:stretch;
-}
-
 .surveybuilder__sidebar {
   display: flex;
   flex-direction: column;

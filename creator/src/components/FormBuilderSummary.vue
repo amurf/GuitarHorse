@@ -1,5 +1,7 @@
 <template>
-  <h1>Summary</h1>
+  <div class="tab__container">
+    <h1>Summary</h1>    
+  </div>
 </template>
 <script>
 export default {
