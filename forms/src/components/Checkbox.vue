@@ -14,7 +14,7 @@ export default {
       type: String,
       label: "Field name",
     },
-    mandatory: {
+    required: {
       type: Boolean,
       label: "Required",
     },

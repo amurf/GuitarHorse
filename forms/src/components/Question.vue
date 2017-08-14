@@ -4,13 +4,13 @@
       <!-- stevify this -->
       <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
       <ul>
-        <li v-for="error in errors">{{ error }}</li>
+        <li v-for="error in errors">{{ errorMessageFor(error) }}</li>
       </ul>
     </div>
     <div class='question-label'>
       <span class='question-number'>{{ number }}</span>
       <label>{{ question.label }}</label>
-      <span class='question-status' v-if="question.mandatory">* Required</span>
+      <span class='question-status' v-if="question.required">* Required</span>
     </div>
     <div class='question-input'>
       <component :is="question.component" v-bind="question" :answers="answers"></component>
@@ -25,13 +25,20 @@ import ghScale from './Scale';
 import ghSelect from './Select';
 import ghCheckbox from './Checkbox';
 
+import Validators from '../validators';
+
 export default {
   name: 'question',
   props: ['number', 'question', 'answers'],
   components: { ghText, ghScale, ghSelect, ghCheckbox },
   computed: {
     errors() {
-      let validators = this.$options.validations();
+      let validators = this.$options.validations(this);
+
+      if (!validators.length) {
+        return [];
+      }
+
       let val        = this.answers[this.question.name];
 
       let errors = [];
@@ -47,24 +54,22 @@ export default {
       return errors;
     },
   },
-  validations() {
+  methods: {
+    errorMessageFor(type) {
+      if (this.question.errors && this.question.errors[type]) {
+        return this.question.errors[type];
+      }
 
-    // I think we should store any validation-style thing in
-    // question.validations as an array of functions..?
-
-    function required(val) {
-      return ( val && val !== undefined );
-    }
-
-    function greaterThan(val, greater) {
-      return ( val && val > greater );
-    }
-
+      return Validators[type].msg || type;
+    },
+  },
+  validations(vm) {
     let validations = [];
-    validations.push({func: required, name: 'Required'});
-    validations.push({func: greaterThan, name: 'Greater'});
+    if (vm.question.required) {
+      validations.push(Validators.required);
+    }
 
-    let questionValidations = this.question;
+    // let questionValidations = this.question;
     // Generate required validation functions here.
 
 
