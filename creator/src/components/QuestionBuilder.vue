@@ -17,7 +17,7 @@
 
 <script>
 
-import ghQuestion from 'shared/Question';
+import ghQuestion from 'shared/components/Question';
 import ghQuestionOptions from './QuestionOptions';
 
 export default {

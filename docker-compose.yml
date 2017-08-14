@@ -58,5 +58,5 @@ services:
     volumes:
       - ./creator/src:/build/src
       - ./creator/app:/build/app
-      - ./forms/src/components:/build/shared
+      - ./forms/src/:/build/shared
 

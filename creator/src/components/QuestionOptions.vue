@@ -5,8 +5,8 @@
 </template>
 <script>
 
-import { ghQuestionConfigForm } from "shared/layouts";
-import ghQuestion from "shared/Question";
+import { ghQuestionConfigForm } from "shared/components/layouts";
+import ghQuestion from "shared/components/Question";
 
 export default {
   name: 'gh-question-options',
