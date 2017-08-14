@@ -1,6 +1,6 @@
 <template>
   <div class='question' :id="question.id">
-    <div class='question-errors'>
+    <div class='question-errors' v-if="errors.length">
       <!-- stevify this -->
       <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
       <ul>
@@ -44,7 +44,6 @@ export default {
         }
       });
 
-      console.log(errors);
       return errors;
     },
   },
