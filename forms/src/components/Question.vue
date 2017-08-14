@@ -102,6 +102,7 @@ export default {
 /* Stevify */
 .question-errors .fa {
   font-size: 3em;
+  color: $brand-danger;
 }
 
 .question-label {
