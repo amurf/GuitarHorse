@@ -1,6 +1,12 @@
 <template>
   <div class='question'>
-    {{ errors }}
+    <div class='question-errors'>
+      <!-- stevify this -->
+      <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
+      <ul>
+        <li v-for="error in errors">{{ error }}</li>
+      </ul>
+    </div>
     <div class='question-label'>
       <span class='question-number'>{{ number }}</span>
       <label>{{ question.label }}</label>
@@ -28,17 +34,17 @@ export default {
       let validators = this.$options.validations();
       let val        = this.answers[this.question.name];
 
-      let errors = {};
+      let errors = [];
 
       let vm = this;
 
       validators.forEach(validator => {
         if (!validator.func(val, 6)) {
-          if (!errors[vm.question.name]) { errors[vm.question.name] = []; }
-          errors[vm.question.name].push(validator.name);
+          errors.push(validator.name);
         }
       });
 
+      console.log(errors);
       return errors;
     },
   },
@@ -78,6 +84,24 @@ export default {
   border-color: $border-color;
   border-radius: $border-radius;
 
+}
+
+.question-errors {
+  display: flex;
+  padding: 1em;
+  background-color: $lightest-gray;
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+  border-bottom:$border-color $border-style $border-width;
+}
+
+.question-errors ul {
+  margin: 0;
+}
+
+/* Stevify */
+.question-errors .fa {
+  font-size: 3em;
 }
 
 .question-label {
