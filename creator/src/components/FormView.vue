@@ -6,6 +6,7 @@
         <b-nav-item :to="{name: 'form-config', params: $route.params}">Configuration</b-nav-item>
         <b-nav-item :to="{name: 'form-content', params: $route.params}">Content</b-nav-item>
         <b-nav-item :to="{name: 'form-content-json', params: $route.params}">JSON</b-nav-item>
+        <b-nav-item :to="{name: 'form-logic', params: $route.params }">Horse Sense</b-nav-item>
         <b-nav-item :to="{name: 'form-notes', params: $route.params }">Notes</b-nav-item>
         <b-nav-item :to="{name: 'form-data', params: $route.params }">Data</b-nav-item>
       </template>

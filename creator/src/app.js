@@ -13,6 +13,7 @@ Vue.use(BootstrapVue);
 import FormBuilderSummary from './components/FormBuilderSummary';
 import FormBuilderConfig from './components/FormBuilderConfig';
 import FormBuilderContent from './components/FormBuilderContent';
+import FormBuilderLogic from './components/FormBuilderLogic';
 import FormBuilderJSON from './components/FormBuilderJSON';
 import FormBuilderNotes from './components/FormBuilderNotes';
 import FormData from './components/FormData';
@@ -57,6 +58,12 @@ let router = new Router({
           path: 'json',
           name: 'form-content-json',
           component: FormBuilderJSON,
+          props: true,
+        },
+        {
+          path: 'logic',
+          name: 'form-logic',
+          component: FormBuilderLogic,
           props: true,
         },
         {
