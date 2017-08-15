@@ -47,7 +47,4 @@ export default {
 }
 </script>
 <style lang="scss">
-.container.content {
-  padding: 60px 15px 0;
-}
 </style>

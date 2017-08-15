@@ -35,6 +35,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+// Misc
 .heading {
   padding: 20px 0px;
 }
@@ -48,4 +50,5 @@ button, a {
   width: 100%;
   margin-bottom: 5px;
 }
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="tab__container">
   <h1>Form Data</h1>
   <b-button>Download CSV</b-button>
   <b-table hover show-empty responsive

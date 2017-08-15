@@ -25,6 +25,8 @@ export default {
 }
 </script>
 <style lang="scss">
+
+// Misc
 .container.content {
   padding: 60px 15px 0;
 }

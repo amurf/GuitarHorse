@@ -1,5 +1,9 @@
 <template>
+
+  <div class="tab__container">
   <code> {{ formattedFormConfig }} </code>
+  </div>
+
 </template>
 <script>
 export default {

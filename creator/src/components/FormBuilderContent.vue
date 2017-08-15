@@ -127,7 +127,6 @@ export default {
 
 .surveybuilder__canvas {
   flex: 1 1 auto;
-  background-color:$light-gray;
   padding:10px;
 
   -webkit-box-shadow: inset -39px 0px 48px -44px rgba(0,0,0,0.5);
