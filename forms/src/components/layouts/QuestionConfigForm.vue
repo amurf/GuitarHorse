@@ -12,12 +12,13 @@
 // This is just a custom layout for a question type. Consider a better way to do this in the future.
 
 import ghText from '../Text';
+import ghNumber from '../Number';
 import ghCheckbox from '../Checkbox';
 
 export default {
   name: 'gh-fieldset',
   props: ['questions', 'model'],
-  components: { ghText, ghCheckbox },
+  components: { ghText, ghNumber, ghCheckbox },
 };
 
 </script>
@@ -29,8 +30,8 @@ export default {
 }
 
 label {
-flex:0 1 20%;
-align-self: flex-start;
+  flex:0 1 20%;
+  align-self: flex-start;
 }
 
 input {

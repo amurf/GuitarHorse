@@ -21,6 +21,8 @@
 
 //Pull in slot types
 import ghText from './Text';
+import ghNumber from './Number';
+import ghEmail from './Email';
 import ghScale from './Scale';
 import ghSelect from './Select';
 import ghCheckbox from './Checkbox';
@@ -30,7 +32,7 @@ import Validators from '../validators';
 export default {
   name: 'question',
   props: ['number', 'question', 'answers'],
-  components: { ghText, ghScale, ghSelect, ghCheckbox },
+  components: { ghText, ghNumber, ghEmail, ghScale, ghSelect, ghCheckbox },
   computed: {
     errors() {
       let validators = this.$options.validations(this);

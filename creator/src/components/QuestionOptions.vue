@@ -35,6 +35,7 @@ export default {
     let typeToComponents = {
       'String'  : 'ghText',
       'Boolean' : 'ghCheckbox',
+      'Number'  : 'ghNumber',
       'Array'   : 'ghText',
       //'Array'   : 'tbc',
     };

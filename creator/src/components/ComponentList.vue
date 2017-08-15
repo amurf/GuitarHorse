@@ -1,14 +1,17 @@
 <template>
   <div class="vert">
-    <b-btn size="md" @click="addText"><span class="fa fa-align-justify" aria-role = "hidden"></span>Add Text</b-btn>
-    <b-btn size="md" @click="addScale"><span class="fa fa-balance-scale" aria-role = "hidden"></span>Add Scale</b-btn>
-    <b-btn size="md" @click="addSelect"><span class="fa fa-caret-square-o-down" aria-role = "hidden"></span>Add Select</b-btn>
-    <b-btn size="md" @click="addCheckbox"><span class="fa fa-check-square-o" aria-role = "hidden"></span>Add Checkbox</b-btn>
+    <b-button size="md" @click="addText"><span class="fa fa-align-justify" aria-role = "hidden"></span>Add Text</b-button>
+    <b-button size="md" @click="addNumber">Add Number</b-button>
+    <b-button size="md" @click="addEmail">Add Email</b-button>
+    <b-button size="md" @click="addScale"><span class="fa fa-balance-scale" aria-role = "hidden"></span>Add Scale</b-button>
+    <b-button size="md" @click="addSelect"><span class="fa fa-caret-square-o-down" aria-role = "hidden"></span>Add Select</b-button>
+    <b-button size="md" @click="addCheckbox"><span class="fa fa-check-square-o" aria-role = "hidden"></span>Add Checkbox</b-button>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+
+import uuid from 'uuid/v4';
 
 export default {
   name: 'component-list',
@@ -25,48 +28,35 @@ export default {
     };
   },
   methods: {
-    addText: function() {
-      let question = {
-        id: this.questionsAdded,
-        name: 'example-' + this.questionsAdded,
-        component: 'ghText',
-        label: 'the example label'
+    createQuestion(component) {
+      return {
+        id: uuid(),
+        component: component,
       };
-      this.$emit('question-added', question);
-      this.questionsAdded++;
+    },
+    addText: function() {
+      this.$emit('question-added', this.createQuestion('ghText'));
+    },
+    addNumber: function() {
+      this.$emit('question-added', this.createQuestion('ghNumber'));
+    },
+    addEmail: function() {
+      this.$emit('question-added', this.createQuestion('ghEmail'));
     },
     addScale: function() {
-      let question = {
-        id: this.questionsAdded,
-        name: 'example-' + this.questionsAdded,
-        component: 'ghScale',
-        options: 3,
-        label: 'the example label'
-      };
+      let question = this.createQuestion('ghScale');
+      question.options = 3;
       this.$emit('question-added', question);
-      this.questionsAdded++;
     },
     addSelect: function() {
-      let question = {
-        id: this.questionsAdded,
-        name: 'example-' + this.questionsAdded,
-        component: 'ghSelect',
-        options: ['a', 'b', 'c'],
-        label: 'the example label'
-      };
+      let question = this.createQuestion('ghSelect');
+      question.options = ['a', 'b', 'c'];
       this.$emit('question-added', question);
-      this.questionsAdded++;
     },
     addCheckbox: function() {
-      let question = {
-        id: this.questionsAdded,
-        name: 'example-' + this.questionsAdded,
-        component: 'ghCheckbox',
-        options: ['a', 'b', 'c'],
-        label: 'the example label'
-      };
+      let question = this.createQuestion('ghCheckbox');
+      question.options = ['a', 'b', 'c'];
       this.$emit('question-added', question);
-      this.questionsAdded++;
     },
   },
 }
