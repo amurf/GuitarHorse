@@ -1,9 +1,12 @@
 <template>
   <div class='question-builder'>
     <div class='question__adminbar'>
-      <span class='fa fa-eraser' aria-hidden='true'></span>
-      <span class='fa fa-space-shuttle' aria-hidden='true'></span>
-      <span class='fa fa-futbol-o' aria-hidden='true' @click="toggleView"></span>
+      <span class="question__adminbar__questiontype">Question Type <!-- TODO Make this dynamic --></span>
+      <span class="question__adminbar__icons">
+        <span class='fa fa-pencil' aria-hidden='true'></span>
+        <span class='fa fa-clone' aria-hidden='true'></span>
+        <span class='fa fa-times-circle-o' aria-hidden='true' @click="toggleView"></span>
+      </span>
     </div>
     <transition name="flip-in" mode="out-in">
       <gh-question :question="question" :number="number" :answers="answers" class="list-complete-item" v-if="!editMode"></gh-question>
@@ -110,8 +113,14 @@ export default {
 }
 
 .question__adminbar {
+
+  display: flex;
+  justify-content: space-between;
+
   background-color:rgb(103, 103, 103);
   text-align: right;
+
+  padding:10px;
 
   border-top-left-radius: $border-radius;
   border-top-right-radius: $border-radius;

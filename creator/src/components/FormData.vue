@@ -1,6 +1,12 @@
 <template>
   <div class="tab__container">
+    <div class="container">
+      <div class="row">
+          <div class="col">
   <h1>Form Data</h1>
+</div>
+</div>
+</div>
   <b-button>Download CSV</b-button>
   <b-table hover show-empty responsive
            :items="answers"

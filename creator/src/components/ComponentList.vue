@@ -1,9 +1,9 @@
 <template>
   <div class="vert">
-    <b-btn size="md" @click="addText">Add Text</b-btn>
-    <b-btn size="md" @click="addScale">Add Scale</b-btn>
-    <b-btn size="md" @click="addSelect">Add Select</b-btn>
-    <b-btn size="md" @click="addCheckbox">Add Checkbox</b-btn>
+    <b-btn size="md" @click="addText"><span class="fa fa-align-justify" aria-role = "hidden"></span>Add Text</b-btn>
+    <b-btn size="md" @click="addScale"><span class="fa fa-balance-scale" aria-role = "hidden"></span>Add Scale</b-btn>
+    <b-btn size="md" @click="addSelect"><span class="fa fa-caret-square-o-down" aria-role = "hidden"></span>Add Select</b-btn>
+    <b-btn size="md" @click="addCheckbox"><span class="fa fa-check-square-o" aria-role = "hidden"></span>Add Checkbox</b-btn>
   </div>
 </template>
 
@@ -81,6 +81,15 @@ button {
 
 .vert {
   @extend .btn-group-vertical;
+}
+
+.vert > button {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.vert > button > span {
+  width:2rem;
 }
 
 </style>
