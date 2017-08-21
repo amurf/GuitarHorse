@@ -8,6 +8,7 @@ COPY package.json /build/
 RUN npm install --quiet && npm install --quiet webpack -g
 
 # Now copy all the rest.
+COPY .babelrc /build/
 COPY webpack.config.js /build/
 
 CMD webpack --color --hide-modules --watch
