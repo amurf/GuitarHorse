@@ -41,14 +41,10 @@ export default {
         return [];
       }
 
-      let val        = this.answers[this.question.name];
-
+      let value  = this.answers[this.question.name];
       let errors = [];
-
-      let vm = this;
-
       validators.forEach(validator => {
-        if (!validator.func(val, this.answers, validator.compare)) {
+        if (!validator.func(value, this.answers, validator.compare)) {
           errors.push(validator);
         }
       });
@@ -68,15 +64,17 @@ export default {
   validations(vm) {
     let validations = [];
 
+    // Define default sets of validations on question types
+    // and pull them in and apply them to fields here.
+    // I think for extra validations (like comparisons) we
+    // can implement it in the builder more so, make it
+    // that it fills a validations array appropriately.
+
     if (vm.question.required) {
       validations.push(Validators.required());
     }
 
     validations.push(Validators.sameAs('qTwo'));
-
-    // let questionValidations = this.question;
-    // Generate required validation functions here.
-
 
     return validations;
   },
