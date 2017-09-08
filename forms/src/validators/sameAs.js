@@ -1,13 +1,16 @@
-function validate(value, answers, validationObj) {
-  let sameAs = answers[validationObj.sameAs];
-  return (value && value == sameAs);
+function validate(value, answers, compare) {
+    let sameAs = answers[compare];
+    return (value && value == sameAs);
 }
 
 let name           = 'sameAs';
-let defaultMessage = `This field must be the same as ${validationObj.sameAs}`;
+let defaultMessage = (compare) => `This field must be the same as ${compare}`;
 
-export default {
-  func: validate,
-  msg:  defaultMessage,
-  name: name,
+export default function(compare) {
+    return {
+        func: validate,
+        msg:  defaultMessage,
+        name: name,
+        compare: compare,
+    }
 }

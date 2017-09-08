@@ -48,8 +48,8 @@ export default {
       let vm = this;
 
       validators.forEach(validator => {
-        if (!validator.func(val, 6)) {
-          errors.push(validator.name);
+        if (!validator.func(val, this.answers, validator.compare)) {
+          errors.push(validator);
         }
       });
 
@@ -57,19 +57,22 @@ export default {
     },
   },
   methods: {
-    errorMessageFor(type) {
-      if (this.question.errors && this.question.errors[type]) {
-        return this.question.errors[type];
+    errorMessageFor(validator) {
+      if (this.question.errors && this.question.errors[validator.name]) {
+        return this.question.errors[validator.name](validator.compare);
       }
 
-      return Validators[type].msg || type;
+      return validator.msg(validator.compare);
     },
   },
   validations(vm) {
     let validations = [];
+
     if (vm.question.required) {
-      validations.push(Validators.required);
+      validations.push(Validators.required());
     }
+
+    validations.push(Validators.sameAs('qTwo'));
 
     // let questionValidations = this.question;
     // Generate required validation functions here.
