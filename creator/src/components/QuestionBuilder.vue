@@ -1,11 +1,11 @@
 <template>
   <div class='question-builder'>
     <div class='question__adminbar'>
-      <span class="question__adminbar__questiontype">Question Type <!-- TODO Make this dynamic --></span>
+      <span class="question__adminbar__questiontype">{{ question.component }}</span>
       <span class="question__adminbar__icons">
-        <span class='fa fa-pencil' aria-hidden='true'></span>
+        <span class='fa fa-pencil' aria-hidden='true' @click="toggleView"></span>
         <span class='fa fa-clone' aria-hidden='true'></span>
-        <span class='fa fa-times-circle-o' aria-hidden='true' @click="toggleView"></span>
+        <span class='fa fa-times-circle-o' aria-hidden='true'></span>
       </span>
     </div>
     <transition name="flip-in" mode="out-in">
