@@ -1,7 +1,6 @@
 <template>
   <div class='question-options'>
     <gh-question-config-form :questions="formConfig.questions" :model="model"></gh-question-config-form>
-    <b-button>Add Comparison</b-button> {{ formConfig.questions }}
   </div>
 </template>
 <script>
@@ -71,7 +70,6 @@ export default {
       }
     });
 
-    console.log("put", questions);
     vm.formConfig.questions = questions;
   },
 }

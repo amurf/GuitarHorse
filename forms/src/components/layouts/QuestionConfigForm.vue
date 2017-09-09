@@ -5,6 +5,14 @@
       <component :is="question.component" :answers="model" v-bind="question">
       </component>
     </div>
+    <h3>comparisons - move this to modal?</h3>
+    <div v-for="comparison in model.comparisons">
+      <gh-select :options="validators" :answers="comparison" name="type"></gh-select>
+      <gh-text :answers="comparison" name="slot"></gh-text>
+    </div>
+    <gh-select :options="validators" :answers="newComparison" name="type"></gh-select>
+    <gh-text :answers="newComparison" name="slot"></gh-text>
+    <b-button>Add new comparison</b-button>
   </div>
 </template>
 
@@ -14,11 +22,26 @@
 import ghText from '../Text';
 import ghNumber from '../Number';
 import ghCheckbox from '../Checkbox';
+import ghSelect from '../Select';
+
+import Validators from "../../validators";
 
 export default {
   name: 'gh-fieldset',
   props: ['questions', 'model'],
-  components: { ghText, ghNumber, ghCheckbox },
+  components: { ghText, ghNumber, ghCheckbox, ghSelect },
+  data() {
+    return {
+			showModal: false,
+      newComparison: {},
+    };
+  },
+  computed: {
+    validators() {
+      // I think we should return a better name here eventually
+      return Object.keys(Validators);
+    },
+  },
 };
 
 </script>
