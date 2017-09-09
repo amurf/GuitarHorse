@@ -1,5 +1,5 @@
-function validate(value, answers, compare) {
-    let sameAs = answers[compare];
+function validate(value, compare) {
+    let sameAs = compare.answer;
     return (value && value == sameAs);
 }
 

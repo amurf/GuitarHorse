@@ -31,10 +31,14 @@ import Validators from '../validators';
 
 export default {
   name: 'question',
-  props: ['number', 'question', 'answers'],
+  props: ['number', 'question', 'answers', 'comparisons', 'disableValidations'],
   components: { ghText, ghNumber, ghEmail, ghScale, ghSelect, ghCheckbox },
   computed: {
     errors() {
+      if (this.disableValidations) {
+          return [];
+      }
+
       let validators = this.$options.validations(this);
 
       if (!validators.length) {
@@ -44,7 +48,7 @@ export default {
       let value  = this.answers[this.question.name];
       let errors = [];
       validators.forEach(validator => {
-        if (!validator.func(value, this.answers, validator.compare)) {
+        if (!validator.func(value, this.comparisons[validator.compare])) {
           errors.push(validator);
         }
       });
@@ -64,6 +68,7 @@ export default {
   validations(vm) {
     let validations = [];
 
+
     // Define default sets of validations on question types
     // and pull them in and apply them to fields here.
     // I think for extra validations (like comparisons) we
@@ -74,7 +79,11 @@ export default {
       validations.push(Validators.required());
     }
 
-    validations.push(Validators.sameAs('qTwo'));
+    if (vm.question.comparisons) {
+        vm.question.comparisons.forEach(comparison => {
+            validations.push(Validators[comparison.type](comparison.slot));
+        });
+    }
 
     return validations;
   },

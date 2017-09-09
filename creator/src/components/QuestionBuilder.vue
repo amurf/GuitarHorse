@@ -9,7 +9,7 @@
       </span>
     </div>
     <transition name="flip-in" mode="out-in">
-      <gh-question :question="question" :number="number" :answers="answers" class="list-complete-item" v-if="!editMode"></gh-question>
+      <gh-question disable-validations="true" :question="question" :number="number" :answers="answers" class="list-complete-item" v-if="!editMode"></gh-question>
       <gh-question-options :component="question.component" :model="question" v-if="editMode"></gh-question-options>
     </transition>
   </div>

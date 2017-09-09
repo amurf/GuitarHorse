@@ -2,13 +2,10 @@
   <div>
     <p>answers: <code>{{ answers }}</code></p>
     <gh-question v-for="(question, index) in form.questions" :key="question.name"
-      :number="index + 1" :question="question" :answers="answers">
+      :number="index + 1" :question="question" :answers="answers" :comparisons="comparisonSlots(question)">
     </gh-question>
     <b-btn variant="success" size="lg" @click="save">Save</b-btn>
   </div>
-</template>
-
-
 </template>
 <script>
 import ghQuestion from '../Question';
@@ -45,6 +42,25 @@ export default {
   methods: {
     save: function() {
       axios.put('/api/answer', {answers: this.answers}).then(console.log);
+    },
+    comparisonSlots: function(question) {
+        if (!question.comparisons) {
+            return;
+        }
+
+        let questionsByName = this.questionsByName;
+        let comparisons     = question.comparisons;
+        let slots           = {};
+
+        comparisons.forEach(comparison => {
+            // {type = validator, slot = abc}
+            // XXX: Should I support arrays of fields?
+            slots[comparison.slot] = {
+                question: questionsByName[comparison.slot],
+                answer: this.answers[comparison.slot],
+            };
+        });
+        return slots;
     },
   },
 };
