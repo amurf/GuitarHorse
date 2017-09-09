@@ -1,6 +1,7 @@
 <template>
   <div class='question-options'>
     <gh-question-config-form :questions="formConfig.questions" :model="model"></gh-question-config-form>
+    <b-button>Add Comparison</b-button> {{ formConfig.questions }}
   </div>
 </template>
 <script>
@@ -49,12 +50,14 @@ export default {
 
     Object.keys(componentObject.props).forEach(function(propName) {
       let type = props[propName].type;
+      let label = props[propName].label;
+
       // Skip anything without a type property
       // Maybe this should look at the label property?
-      if (type) {
+      if (label) {
         let stringifiedType = vm.getType(type);
         let newQuestion = {
-          label: props[propName].label,
+          label: label,
           component: typeToComponents[stringifiedType],
           name: propName,
         };
@@ -68,6 +71,7 @@ export default {
       }
     });
 
+    console.log("put", questions);
     vm.formConfig.questions = questions;
   },
 }
