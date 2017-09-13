@@ -3,7 +3,7 @@
         <div class='question-errors' v-if="errors.length">
             <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
             <ul>
-                <li v-for="error in errors">{{ errorMessageFor(error) }}</li>
+                <li v-for="error in errors">{{ error }}</li>
             </ul>
         </div>
         <div class='question-label'>
@@ -46,11 +46,6 @@ export default {
 
             return errors;
         },
-    },
-    methods: {
-        errorMessageFor(validator) {
-            return validate.validatorErrorMessage(this.question, validator);
-        }
     },
 }
 </script>

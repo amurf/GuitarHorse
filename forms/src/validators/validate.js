@@ -38,6 +38,7 @@ function generateComparisons(questions, answers) {
             continue;
         }
 
+        // TODO: This would be nicer with lodash?
         comparisons.forEach(comparison => {
             if (!keyByName[comparison.slot]) {
                 console.error(`Invalid comparison on ${question.name} -  ${comparison.slot} question does not exist`);
@@ -57,37 +58,38 @@ function generateComparisons(questions, answers) {
     return result;
 }
 
-
+// Returns hash of errors: {fieldName: [error, error]}
 function validate(questions, answers, comparisons) {
-    let errors = [];
+    let errors = {};
 
-    // If comparisons not passed in, generate.
+    // If comparisons not passed in, generate. XXX: Needed?
     if (!comparisons) {
         comparisons = generateComparisons(questions, answers);
     }
 
     for (let question of questions) {
-        let validators  = getValidators(question);
-        let value = answers[question.name];
-        validators.forEach(validator => {
-            if (!validator.func(value, comparisons[validator.compare])) {
-                errors.push(validator);
-            }
-        });
+        let questionErrors = validateQuestion(question, answers[question.name], comparisons);
+        if (questionErrors.length) {
+            errors[question.name] = questionErrors;
+        }
     }
 
     return errors;
 }
 
+// Returns array of errors for a question
+// TODO: Either return error message, or an object of
+// { validator, errorMessage } instead.
 function validateQuestion(question, value, comparisons) {
     let errors     = [];
     let validators = getValidators(question);
 
-    validators.forEach(validator => {
+    for (let validator of validators) {
         if (!validator.func(value, comparisons[validator.compare])) {
-            errors.push(validator);
+            let errorMessage = getErrorMessage(question, validator);
+            errors.push(errorMessage);
         }
-    });
+    }
 
     return errors;
 }
@@ -96,7 +98,7 @@ function hasValidations(question) {
     return (question.comparisons || question.required);
 }
 
-function validatorErrorMessage(question, validator) {
+function getErrorMessage(question, validator) {
     if (question.errors && question.errors[validator.name]) {
         return question.errors[validator.name](validator.compare);
     }
@@ -105,7 +107,6 @@ function validatorErrorMessage(question, validator) {
 }
 
 export default {
-    validatorErrorMessage,
     hasValidations,
     getValidators,
     generateComparisons,
