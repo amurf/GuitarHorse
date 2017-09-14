@@ -40,7 +40,7 @@ import axios from 'axios';
 export default {
     name: 'form-builder-content',
     props: ['surveyId', 'form'],
-    components: { ghComponentList, ghQuestionBuilder, draggable },
+    components: { ghComponentList, ghQuestionBuilder },
     data() {
         return {
             answers: {},
