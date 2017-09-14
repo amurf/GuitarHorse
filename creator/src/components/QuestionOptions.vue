@@ -8,25 +8,21 @@
         </div>
         <!-- display these nicer -->
         <p>comparisons: <code>{{ model.comparisons }}</code></p>
-        <gh-add-comparison-modal></gh-add-comparison-modal>
     </div>
 </template>
 <script>
 
-import ghAddComparisonModal from './AddComparisonModal';
 import ghQuestion from "shared/components/Question";
 import ghText from "shared/components/Text";
 import ghNumber from "shared/components/Number";
 import ghCheckbox from "shared/components/Checkbox";
 import ghSelect from "shared/components/Select";
 
-import Validators from "shared/validators";
-
 export default {
     name: 'gh-question-options',
     props: ['component', 'model'],
     //components: { ghQuestionConfigForm },
-    components: { ghText, ghNumber, ghCheckbox, ghSelect, ghAddComparisonModal },
+    components: { ghText, ghNumber, ghCheckbox, ghSelect },
     data() {
         return {
             formConfig: {

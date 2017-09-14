@@ -35,6 +35,8 @@
 import ghComponentList from './ComponentList';
 import ghQuestionBuilder from './QuestionBuilder';
 
+import map from 'lodash';
+
 import axios from 'axios';
 
 export default {
