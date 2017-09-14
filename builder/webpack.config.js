@@ -15,7 +15,6 @@ module.exports = {
       "vue-router",
       "axios",
       "bootstrap-vue",
-      "vuedraggable",
     ],
   },
   output: {
