@@ -1,14 +1,6 @@
 import Validators from './index'
+import { keyBy } from 'lodash';
 
-function questionsByName(questions) {
-    let result = {};
-
-    questions.forEach(question => {
-        result[question.name] = question;
-    });
-
-    return result;
-}
 function getValidators(question) {
     let validators = [];
 
@@ -30,7 +22,7 @@ function getValidators(question) {
 
 function generateComparisons(questions, answers) {
     let result = {};
-    let keyByName = questionsByName(questions);
+    let questionsByName = keyBy(questions, 'name');
 
     for (let question of questions) {
         let comparisons = question.comparisons;
@@ -40,7 +32,7 @@ function generateComparisons(questions, answers) {
 
         // TODO: This would be nicer with lodash?
         comparisons.forEach(comparison => {
-            if (!keyByName[comparison.slot]) {
+            if (!questionsByName[comparison.slot]) {
                 console.error(`Invalid comparison on ${question.name} -  ${comparison.slot} question does not exist`);
             }
 
@@ -49,7 +41,7 @@ function generateComparisons(questions, answers) {
             }
 
             result[comparison.slot] = {
-                question: keyByName[comparison.slot],
+                question: questionsByName[comparison.slot],
                 answer: answers[comparison.slot],
             };
         });
