@@ -5,8 +5,6 @@
             <add-comparison-modal :questions-by-name="questionsByName" @add-comparison="addComparison">
             </add-comparison-modal>
             <br>
-            {{ form.questions }}
-            <br>
             <b-card-group deck v-for="question in allComparisons" :key="question.id">
                 <b-card v-for="(comparison, index) in question.comparisons" :key="`${question.id}-${index}`">
                     {{ question.name }} {{ comparison.type }} {{ comparison.slot }}
