@@ -28,6 +28,7 @@ import ghCheckbox from './Checkbox';
 
 import Validators from '../validators';
 import validate from '../validators/validate';
+import defaultValidations from '../validators/defaults';
 
 export default {
     name: 'question',
@@ -35,14 +36,38 @@ export default {
     components: { ghText, ghNumber, ghEmail, ghScale, ghSelect, ghCheckbox },
     computed: {
         errors() {
-            let validations = validate.hasValidations(this.question);
-
-            if (this.disableValidations || !validations) {
+            if (this.disableValidations) {
                 return [];
             }
 
+            // Run validations, if any of these fail. Don't run the comparisons as it won't make sense
             let value  = this.answers[this.question.name];
+
+            // TODO: Extract this code somewhere else. Maybe into the defaults??
+            let defaults = defaultValidations[this.question.component];
+            if (defaults) {
+                let defaultErrors = [];
+                for (let validator of defaults) {
+
+                    if (!validator.func(value)) {
+                        let errorMessage = validate.getErrorMessage(this.question, validator);
+                        defaultErrors.push(errorMessage);
+                    }
+                }
+
+                if (defaultErrors.length > 0) {
+                    return defaultErrors;
+                }
+            }
+
+            let validations = validate.hasValidations(this.question);
+            if (!validations) {
+                return [];
+            }
+
             let errors  = validate.validateQuestion(this.question, value, this.comparisons);
+
+
 
             return errors;
         },
