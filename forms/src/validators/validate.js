@@ -5,8 +5,11 @@ function getValidators(question) {
     let validators = [];
 
     // Pull in type specific validations
+    // Should these be defined in the validators themselves?
+    // Comparisons are an array, but validators currently sit on the
+    // actual question object.
     if (question.required) {
-        validators.push(Validators.required());
+        validators.push(Validators.required);
     }
 
     let questionComparisons = question.comparisons;
@@ -99,6 +102,7 @@ function getErrorMessage(question, validator) {
 }
 
 export default {
+    getErrorMessage,
     hasValidations,
     getValidators,
     generateComparisons,
