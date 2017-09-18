@@ -20,7 +20,9 @@
 <script>
 import ghSelect from "shared/components/Select";
 import ghQuestion from "shared/components/Question";
-import Validators from 'shared/validators';
+
+import Comparisons from 'shared/validate/comparisons';
+
 import { keyBy } from 'lodash';
 export default {
     name: 'add-comparison-modal',
@@ -36,7 +38,7 @@ export default {
     },
     computed: {
         validators() {
-            return Object.keys(Validators);
+            return Object.keys(Comparisons);
         },
         questionNames() {
             return Object.keys(this.questionsByName);

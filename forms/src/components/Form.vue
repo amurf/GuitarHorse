@@ -12,7 +12,9 @@
 import { ghForm, ghFormSections } from './layouts';
 import ErrorList from './ErrorList';
 import axios from 'axios';
-import validate from '../validators/validate';
+
+import Validate from '../validate';
+
 export default {
     name: 'form',
     props: ['form'],
@@ -34,10 +36,10 @@ export default {
             return hasSections ? 'ghFormSections' : 'ghForm';
         },
         comparisons: function() {
-            return validate.generateComparisons(this.form.questions, this.answers);
+            return Validate.generateComparisons(this.form.questions, this.answers);
         },
         validations: function() {
-            return validate.validate(this.form.questions, this.answers);
+            return Validate.compare(this.form.questions, this.answers);
         }
     },
     methods: {

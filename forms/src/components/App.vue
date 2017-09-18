@@ -14,7 +14,6 @@ import ghFooter from './Footer';
 // Pull in all components from layouts here.
 import { ghForm, ghFormSections } from './layouts';
 import axios from 'axios';
-import validate from '../validators/validate';
 
 export default {
     name: 'app',

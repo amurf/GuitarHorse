@@ -26,7 +26,7 @@ import ghScale from './Scale';
 import ghSelect from './Select';
 import ghCheckbox from './Checkbox';
 
-import Validate from '../validators/validate';
+import Validate from '../validate';
 
 export default {
     name: 'question',

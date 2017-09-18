@@ -6,14 +6,6 @@ import { keyBy } from 'lodash';
 function getComparisons(question) {
   let comparisons = [];
 
-  // Pull in type specific validations
-  // Should these be defined in the comparisons themselves?
-  // Comparisons are an array, but comparisons currently sit on the
-  // actual question object.
-  // if (question.required) {
-  // comparisons.push(Comparisons.required);
-  // }
-
   let questionComparisons = question.comparisons;
   if (questionComparisons) {
     questionComparisons.forEach(comparison => {
