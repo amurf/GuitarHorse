@@ -1,111 +1,140 @@
-import Validators from './index'
+import Comparisons from './comparisons'
+import DefaultValidations from './defaults';
+
 import { keyBy } from 'lodash';
 
-function getValidators(question) {
-    let validators = [];
+function getComparisons(question) {
+  let comparisons = [];
 
-    // Pull in type specific validations
-    // Should these be defined in the validators themselves?
-    // Comparisons are an array, but validators currently sit on the
-    // actual question object.
-    if (question.required) {
-        validators.push(Validators.required);
-    }
+  // Pull in type specific validations
+  // Should these be defined in the comparisons themselves?
+  // Comparisons are an array, but comparisons currently sit on the
+  // actual question object.
+  // if (question.required) {
+  // comparisons.push(Comparisons.required);
+  // }
 
-    let questionComparisons = question.comparisons;
-    if (questionComparisons) {
-        questionComparisons.forEach(comparison => {
-            validators.push(Validators[comparison.type](comparison.slot));
-        });
-    }
+  let questionComparisons = question.comparisons;
+  if (questionComparisons) {
+    questionComparisons.forEach(comparison => {
+      comparisons.push(Comparisons[comparison.type](comparison.slot));
+    });
+  }
 
-    return validators;
+  return comparisons;
 }
 
 
 function generateComparisons(questions, answers) {
-    let result = {};
-    let questionsByName = keyBy(questions, 'name');
+  let result = {};
+  let questionsByName = keyBy(questions, 'name');
 
-    for (let question of questions) {
-        let comparisons = question.comparisons;
-        if (!comparisons) {
-            continue;
-        }
-
-        // TODO: This would be nicer with lodash?
-        comparisons.forEach(comparison => {
-            if (!questionsByName[comparison.slot]) {
-                console.error(`Invalid comparison on ${question.name} -  ${comparison.slot} question does not exist`);
-            }
-
-            if (result[comparison.slot]) {
-                return;
-            }
-
-            result[comparison.slot] = {
-                question: questionsByName[comparison.slot],
-                answer: answers[comparison.slot],
-            };
-        });
+  for (let question of questions) {
+    let comparisons = question.comparisons;
+    if (!comparisons) {
+      continue;
     }
 
-    return result;
+    // TODO: This would be nicer with lodash?
+    comparisons.forEach(comparison => {
+      if (!questionsByName[comparison.slot]) {
+        console.error(`Invalid comparison on ${question.name} -  ${comparison.slot} question does not exist`);
+      }
+
+      if (result[comparison.slot]) {
+        return;
+      }
+
+      result[comparison.slot] = {
+        question: questionsByName[comparison.slot],
+        answer: answers[comparison.slot],
+      };
+    });
+  }
+
+  return result;
 }
 
 // Returns hash of errors: {fieldName: [error, error]}
-function validate(questions, answers, comparisons) {
-    let errors = {};
+function compare(questions, answers, comparisons) {
+  let errors = {};
 
-    // If comparisons not passed in, generate. XXX: Needed?
-    if (!comparisons) {
-        comparisons = generateComparisons(questions, answers);
+  // If comparisons not passed in, generate. XXX: Needed?
+  if (!comparisons) {
+    comparisons = generateComparisons(questions, answers);
+  }
+
+  for (let question of questions) {
+    let questionErrors = compareQuestion(question, answers[question.name], comparisons);
+    if (questionErrors.length) {
+      errors[question.name] = questionErrors;
     }
+  }
 
-    for (let question of questions) {
-        let questionErrors = validateQuestion(question, answers[question.name], comparisons);
-        if (questionErrors.length) {
-            errors[question.name] = questionErrors;
-        }
-    }
-
-    return errors;
+  return errors;
 }
 
 // Returns array of errors for a question
 // TODO: Either return error message, or an object of
-// { validator, errorMessage } instead.
-function validateQuestion(question, value, comparisons) {
-    let errors     = [];
-    let validators = getValidators(question);
+// { comparator, errorMessage } instead.
+function compareQuestion(question, value, compare) {
+  let errors = [];
 
-    for (let validator of validators) {
-        if (!validator.func(value, comparisons[validator.compare])) {
-            let errorMessage = getErrorMessage(question, validator);
-            errors.push(errorMessage);
-        }
+  let comparisons = getComparisons(question);
+  for (let comparator of comparisons) {
+    if (!comparator.func(value, compare[comparator.compare])) {
+      let errorMessage = getErrorMessage(question, comparator);
+      errors.push(errorMessage);
     }
+  }
 
-    return errors;
+  return errors;
 }
 
-function hasValidations(question) {
-    return (question.comparisons || question.required);
+function hasComparisons(question) {
+  return (question.comparisons || question.required);
 }
 
-function getErrorMessage(question, validator) {
-    if (question.errors && question.errors[validator.name]) {
-        return question.errors[validator.name](validator.compare);
+function getErrorMessage(question, comparator) {
+  if (question.errors && question.errors[comparator.name]) {
+    return question.errors[comparator.name](comparator.compare);
+  }
+
+  return comparator.msg(comparator.compare);
+}
+
+
+// This applies default validations to a component by type.
+// i.e number components, must be numbers.
+function validateComponent(question, value) {
+  let defaults = DefaultValidations[question.component];
+
+  if (!defaults) {
+    return;
+  }
+
+  let defaultErrors = [];
+  for (let validator of defaults) {
+    if (!validator.func(value)) {
+      let errorMessage = getErrorMessage(question, validator);
+      defaultErrors.push(errorMessage);
     }
+  }
 
-    return validator.msg(validator.compare);
+  if (defaultErrors.length > 0) {
+    return defaultErrors;
+  }
+
 }
+
 
 export default {
-    getErrorMessage,
-    hasValidations,
-    getValidators,
-    generateComparisons,
-    validateQuestion,
-    validate,
+  getErrorMessage,
+  hasComparisons,
+  getComparisons,
+  generateComparisons,
+
+  validateComponent,
+  compareQuestion,
+  compare,
 };

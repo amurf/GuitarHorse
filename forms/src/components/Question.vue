@@ -26,9 +26,7 @@ import ghScale from './Scale';
 import ghSelect from './Select';
 import ghCheckbox from './Checkbox';
 
-import Validators from '../validators';
-import validate from '../validators/validate';
-import defaultValidations from '../validators/defaults';
+import Validate from '../validators/validate';
 
 export default {
     name: 'question',
@@ -40,36 +38,26 @@ export default {
                 return [];
             }
 
-            // Run validations, if any of these fail. Don't run the comparisons as it won't make sense
-            let value  = this.answers[this.question.name];
+            let value = this.answers[this.question.name];
 
-            // TODO: Extract this code somewhere else. Maybe into the defaults??
-            let defaults = defaultValidations[this.question.component];
-            if (defaults) {
-                let defaultErrors = [];
-                for (let validator of defaults) {
-
-                    if (!validator.func(value)) {
-                        let errorMessage = validate.getErrorMessage(this.question, validator);
-                        defaultErrors.push(errorMessage);
-                    }
-                }
-
-                if (defaultErrors.length > 0) {
-                    return defaultErrors;
-                }
+            // component type validation errors. comparisons would fail without
+            // this check first to confirm the data is in the correct format
+            let validationErrors = Validate.validateComponent(this.question, value);
+            if (validationErrors) {
+              return validationErrors;
             }
 
-            let validations = validate.hasValidations(this.question);
-            if (!validations) {
+            if (!Validate.hasComparisons(this.question)) {
                 return [];
             }
 
-            let errors  = validate.validateQuestion(this.question, value, this.comparisons);
+            let comparisonErrors  = Validate.compareQuestion(this.question, value, this.comparisons);
+            if (comparisonErrors) {
+              return comparisonErrors;
+            }
 
 
-
-            return errors;
+            return [];
         },
     },
 }
