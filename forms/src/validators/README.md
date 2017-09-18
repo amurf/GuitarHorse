@@ -10,7 +10,7 @@ can be toggled on in the creator, like "required" or "between".
 
 These validate the value of a field and nothing else. This happens before comparisons (see below)
 
-### Current Component/Type Validatoins
+### Current Component/Type Validations
 
 * required
 * number
